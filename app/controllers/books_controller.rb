@@ -7,7 +7,7 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find_by(id: params[:id])
-    natto = Natto::MeCab.new
-    @words = natto.enum_parse(@book.sentence)
+    # natto = Natto::MeCab.new
+    # @words = natto.enum_parse(@book.sentence)
   end
 end
