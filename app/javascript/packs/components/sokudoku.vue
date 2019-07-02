@@ -1,6 +1,6 @@
 <template>
 <div>
-  <h3 class="title has-text-centered">そくどく！٩( 'ω' )و</h3>
+  <h3 class="subtitle has-text-centered">そくどく！٩( 'ω' )و</h3>
   <button @click="start" class="button" :class="{'is-link': reading}">Start</button>
   <button @click="stop" class="button" :class="{'is-link': !reading}">Stop</button>
   <button @click="reset" class="button">Reset</button>
@@ -12,13 +12,14 @@
 </template>
 <script>
 import axios from 'axios';
-
+import Router from '../router'
 export default {
+  router: Router,
   data: function () {
     return {
       words: [],
       current_num: 0,
-      current_word: 'こころ',
+      current_word: '',
       reading: false,
       timerObj: null,
       speed: 180
@@ -29,8 +30,9 @@ export default {
   },
   methods: {
     fetchTasks: function () {
-      axios.get('/api/books/10').then((response) => {
+      axios.get(`/api/books/${this.$route.params.id}`).then((response) => {
         this.words = response.data.words
+        this.current_word = this.words[0].text
       }, (error) => {
         console.log(error);
       });
