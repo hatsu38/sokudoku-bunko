@@ -6,7 +6,7 @@ WORK_TITLE = '作品名'
 WORK_TXT_ZIP_URL = 'テキストファイルURL'
 base_dir = 'db/txt/'
 
-CSV.foreach(base_dir+'list_person_all_extended_utf8.csv', headers: true).with_index  do |row, i|
+CSV.foreach('db/list_person_all_extended_utf8.csv', headers: true).with_index  do |row, i|
   begin
     open(URI.escape(row[WORK_TXT_ZIP_URL])) do |file|
       Zip::File.open_buffer(file.read) do |zip|
@@ -19,7 +19,10 @@ CSV.foreach(base_dir+'list_person_all_extended_utf8.csv', headers: true).with_in
         end
       end
     end
-  rescue Errno::EEXIST
+  rescue
     next
   end
 end
+
+system('bash bin/script/all_encode.sh')
+system('bundle exec rails txt_fix:all_txt_fix')
