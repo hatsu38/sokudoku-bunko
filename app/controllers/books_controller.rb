@@ -2,7 +2,7 @@ class BooksController < ApplicationController
   require 'natto'
 
   def index
-    @books = Book.all
+    @books = Book.all.limit(30)
   end
 
   def show

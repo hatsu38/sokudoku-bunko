@@ -1,22 +1,28 @@
-# require 'natto'
-# natto = Natto::MeCab.new
-Book.create(title: '羅生門', txt_file: 'rashomon_result.txt')
-Book.create(title: '人間失格', txt_file: 'ningen_shikkaku_result.txt')
-# Book.create(title: 'こころ', sentence: natto.parse(File.read('db/txt/kokoro_result.txt')))
-# text = ''
-# File.open("db/txt/kokoro_result.txt", mode = "r") do |f|
-#   f.each_line do |line|
-#     next line if /^\s*$/ =~ line
-#     break if f.lineno >= 50
-#     text = text + line
-#   end
-# end
+require 'zip'
+require 'csv'
+require 'open-uri'
 
-# Book.create(title: 'こころ', sentence: text.gsub(" ", ""))
+WORK_TITLE = '作品名'
+WORK_TXT_ZIP_URL = 'テキストファイルURL'
+base_dir = 'db/txt/'
 
-# File.open("db/txt/kokoro_result.txt", mode = "r") do |f|
-#   f.each_line(rs="") do |line|
-#     break if f.lineno >= 1
-#     Book.create(title: 'こころ', sentence: line.chomp(rs=""))
-#   end
-# end
+CSV.foreach('db/list_person_all_extended_utf8.csv', headers: true).with_index  do |row, i|
+  begin
+    open(URI.escape(row[WORK_TXT_ZIP_URL])) do |file|
+      Zip::File.open_buffer(file.read) do |zip|
+        zip.each do |entry|
+          next unless entry.name.end_with?(".txt")
+          Dir::mkdir(base_dir + entry.name.delete('.txt'))
+          save_path = entry.name.delete('.txt') + "/" + entry.name
+          zip.extract(entry, base_dir + save_path) { true }
+          Book.create!(title: row[WORK_TITLE], txt_file: save_path)
+        end
+      end
+    end
+  rescue
+    next
+  end
+end
+
+system('bash bin/script/all_encode.sh')
+system('bundle exec rails txt_fix:all_txt_fix')
