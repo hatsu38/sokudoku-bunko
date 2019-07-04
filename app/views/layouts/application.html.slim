@@ -10,4 +10,6 @@ html
     link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css"
     link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-extensions@4.0.0/dist/css/bulma-extensions.min.css"
   body
+    = link_to '本一覧', books_path
+    = link_to '著者一覧', authors_path
     = yield
