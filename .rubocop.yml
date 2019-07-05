@@ -183,10 +183,6 @@ Lint/UnderscorePrefixedVariableName:
 Lint/UnusedMethodArgument:
   Enabled: false
 
-# 何もしないrescueを許可
-Lint/HandleExceptions:
-  Enabled: false
-
 # 条件文の中での代入を許可
 Lint/AssignmentInCondition:
   Enabled: false

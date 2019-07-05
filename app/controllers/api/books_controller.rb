@@ -8,7 +8,7 @@ class Api::BooksController < ApplicationController
 
   def show
     @book = Book.find_by(id: params[:id])
-    File.open("db/txt/#{@book.txt_file}", "r") do |f|
+    File.open("db/txt/#{@book.txt_file}", 'r') do |f|
       natto = Natto::MeCab.new
       @words = natto.enum_parse(f.read)
     end
