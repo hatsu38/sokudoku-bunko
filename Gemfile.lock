@@ -44,6 +44,8 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.6.0)
       public_suffix (>= 2.0.2, < 4.0)
+    amazon-ecs (2.6.0)
+      nokogiri (~> 1.10)
     archive-zip (0.12.0)
       io-like (~> 0.3.0)
     arel (9.0.0)
@@ -182,6 +184,7 @@ GEM
       thor (>= 0.19.0, < 2.0)
     rainbow (3.0.0)
     rake (12.3.2)
+    rakuten_web_service (1.10.0)
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
@@ -284,6 +287,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  amazon-ecs
   bootsnap (>= 1.1.0)
   brakeman
   byebug
@@ -297,7 +301,8 @@ DEPENDENCIES
   pry-byebug
   pry-rails
   puma (~> 3.11)
-  rails (~> 5.2.3)
+  rails (~> 5.2)
+  rakuten_web_service
   rubocop
   rubycritic
   rubyzip
