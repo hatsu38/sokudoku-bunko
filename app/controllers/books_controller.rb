@@ -2,7 +2,7 @@
 
 class BooksController < ApplicationController
   def index
-    @books = Book.all.limit(30)
+    @books = Book.all.limit(30).includes(:author)
   end
 
   def show

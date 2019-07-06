@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.3'
 
+gem 'font-awesome-sass'
 gem 'rakuten_web_service'
 gem 'amazon-ecs'
 gem 'natto'

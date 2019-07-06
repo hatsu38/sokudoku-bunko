@@ -1,0 +1,12 @@
+- books.each_with_index do |book, i|
+  .column.is-half
+    .card
+      .card-image.light-border-bottom
+        figure.image
+          - if book.rakuten_book_info.try(:medium_image_url)
+            = image_tag book.rakuten_book_info.medium_image_url
+          - else
+            = image_tag 'no_image.png'
+      = link_to book_path(book), class: 'content book-info' do
+        .book-title
+          = book.title

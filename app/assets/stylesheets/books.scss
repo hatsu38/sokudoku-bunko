@@ -1,0 +1,34 @@
+.card-image{
+  .image{
+    img{
+      height: 231px;
+    }
+  }
+}
+
+.book-title{
+  padding: 5px 4px;
+  height: 54px;
+}
+
+.section{
+  padding: .1rem .6rem;
+}
+.book-infos{
+  margin: .5rem 1rem 0;
+}
+.caption{
+  margin: 1rem auto 0;
+  overflow: hidden;
+  p{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+  }
+}
+#more-read-button{
+  margin-bottom: 10px;
+}
+#close-read-button{
+  display: none;
+}

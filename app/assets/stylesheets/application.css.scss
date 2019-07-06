@@ -13,6 +13,8 @@
  *= require_self
  */
 @import "../node_modules/bulma/bulma.sass";
+@import "font-awesome-sprockets";
+@import "font-awesome";
 
 .light-border-bottom{
   border-bottom: 1px solid #dedede;
@@ -20,20 +22,6 @@
 .site-name{
   margin: .5rem;
 }
-
-.card-image{
-  .image{
-    img{
-      height: 231px;
-    }
-  }
-}
-
-.book-title{
-  padding: 5px 4px;
-  height: 54px;
-}
-
-.section{
-  padding: .1rem .6rem;
+.push-top{
+  margin-top: 10px;
 }

@@ -1,4 +1,33 @@
-h1.title.has-text-centered = @book.title
+- content_for :css_each_page, stylesheet_link_tag('books')
+h1.title.has-text-centered.is-4 = @book.title
+-if @book.rakuten_book_info.try(:medium_image_url)
+  figure.is-128x128.has-text-centered
+    =image_tag @book.rakuten_book_info.try(:medium_image_url)
+.book-infos
+  p
+    | 作者：
+    = link_to "#{@book.author.name}", author_path(@book.author)
+  p 初版出版日：#{@book.published}
+  .caption
+    p#caption = @book.rakuten_book_info.try(:caption)
+- if @book.rakuten_book_info
+  p#more-read-button.has-text-centered.has-text-link もっと見る
+  p#close-read-button.has-text-centered.has-text-link 閉じる
 #words
   sokudoku
 = javascript_pack_tag 'read'
+
+javascript:
+  var moreReadButton = document.getElementById("more-read-button");
+  var closeReadButton = document.getElementById("close-read-button");
+  var caption = document.getElementById("caption");
+  moreReadButton.onclick = function(){
+    caption.style.display = "block";
+    moreReadButton.style.display = "none";
+    closeReadButton.style.display = "block";
+  };
+  closeReadButton.onclick = function(){
+    caption.style.display = "-webkit-box";
+    moreReadButton.style.display = "block";
+    closeReadButton.style.display = "none";
+  };
