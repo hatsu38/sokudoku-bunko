@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_40_044441) do
+ActiveRecord::Schema.define(version: 2019_07_40_044442) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,5 +34,18 @@ ActiveRecord::Schema.define(version: 2019_07_40_044441) do
     t.index ["author_id"], name: "index_books_on_author_id"
   end
 
+  create_table "rakuten_book_infos", force: :cascade do |t|
+    t.integer "price"
+    t.string "affiliate_url"
+    t.string "small_image_url"
+    t.string "medium_image_url"
+    t.text "caption"
+    t.bigint "book_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_rakuten_book_infos_on_book_id"
+  end
+
   add_foreign_key "books", "authors"
+  add_foreign_key "rakuten_book_infos", "books"
 end
