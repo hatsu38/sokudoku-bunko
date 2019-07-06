@@ -1,11 +1,13 @@
-h1 青空文庫
-table
+.hero-body
+  p そくどく文庫は、本を読むのが遅い人でも本を読む速度が早くなる画期的なサイトです📖
+
+table.table.is-bordered.is-hoverable.is-fullwidth
   thead
     tr
-      td 作品
-      td 著者
+      th 作品
+      th 著者
   tbody
     - @books.each do |book|
       tr
         td= link_to book.title, book_path(book)
-        td= book.author.name
+        td= link_to book.author.name, author_path(book.author)
