@@ -5,6 +5,7 @@ class CreateBooks < ActiveRecord::Migration[5.2]
     create_table :books do |t|
       t.string  :title, null: false
       t.string  :txt_file, null: false
+      t.date    :published
       t.integer :bookid, null: false, unique: true
       t.references :author, foreign_key: true
 

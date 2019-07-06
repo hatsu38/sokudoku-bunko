@@ -19,13 +19,16 @@ CSV.foreach('db/list_person_all_extended_utf8.csv', headers: true).with_index do
         if author.nil?
           author = Author.create!(name: row['姓'] + row['名'], birthday: row['生年月日'], authorid: row['人物ID'])
         end
-        author.books.create!(title: row[WORK_TITLE], txt_file: save_path, bookid: row['作品ID'])
+        published_str = row['底本初版発行年1'].gsub!(/（(.*?)）/,'')
+        published = Date.strptime(published_str,'%Y年%m月%d日')
+        author.books.create!(title: row[WORK_TITLE], published: published, txt_file: save_path, bookid: row['作品ID'])
         Dir.mkdir(base_dir + entry.name.delete('.txt'))
         zip.extract(entry, base_dir + save_path) { true }
       end
     end
   end
-rescue StandardError
+rescue => e
+  Rails.logger.warn e
   next
 end
 
