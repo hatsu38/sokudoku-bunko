@@ -9,7 +9,6 @@ WORK_TXT_ZIP_URL = 'テキストファイルURL'
 base_dir = 'db/txt/'
 
 CSV.foreach('db/list_person_all_extended_utf8.csv', headers: true).with_index do |row, i|
-  break if i > 12
   URI.parse(URI.escape(row[WORK_TXT_ZIP_URL])).open do |file|
     Zip::File.open_buffer(file.read) do |zip|
       zip.each do |entry|
