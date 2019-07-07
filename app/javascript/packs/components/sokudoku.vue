@@ -1,14 +1,17 @@
 <template>
-<div>
-  <h3 class="subtitle has-text-centered">そくどく！٩( 'ω' )و</h3>
-  <button @click="start" class="button" :class="{'is-link': reading}">Start</button>
-  <button @click="stop" class="button" :class="{'is-link': !reading}">Stop</button>
-  <button @click="reset" class="button">Reset</button>
-  <p class="subtitle">
-    Speed：{{speed}}ms/word<input v-model="speed" class="slider is-fullwidth is-info" step="10" min="100" max="900" type="range">
-  </p>
-  <div class="current_slide">{{current_word}}</div>
-</div>
+  <div>
+    <h3 class="subtitle has-text-centered">そくどく！٩( 'ω' )و</h3>
+    <div class="buttons">
+      <button @click="start" class="button" :class="{'is-link': reading}"><i class="fas fa-play"></i>Start</button>
+      <button @click="stop" class="button" :class="{'is-link': !reading}"><i class="fas fa-stop"></i>Stop</button>
+      <button @click="reset" class="button"><i class="fas fa-backward"></i>Reset</button>
+    </div>
+    <p class="subtitle is-marginless">
+      Speed：{{speed}}ms/word
+    </p>
+    <input v-model="speed" class="slider has-background-info is-fullwidth is-info" step="10" min="100" max="900" type="range">
+    <div class="current_slide">{{current_word}}</div>
+  </div>
 </template>
 <script>
 import axios from 'axios';
@@ -56,7 +59,7 @@ export default {
       this.reading = false
     },
     reset: function(){
-      this.current_word = 'こころ'
+      this.current_word = this.words[0].text
       this.current_num = 0
     }
   }
@@ -64,6 +67,15 @@ export default {
 </script>
 
 <style>
+#words{
+  text-align: center;
+}
+.buttons{
+  justify-content: center;
+}
+.button > i, .button > svg{
+  margin-right: 5px;
+}
 .title{
   margin-top: 20px;
 }
@@ -77,7 +89,7 @@ li{
   align-items: center;
 }
 .current_slide{
-  font-size: 55px;
+  font-size: 35px;
   background: #333;
   color: #fff;
   width: 100%;
@@ -85,5 +97,21 @@ li{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+input[type=range] {
+  -webkit-appearance:none;
+  height: 13px;
+  width: 100%;
+  cursor: pointer;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 20px;
+  width: 16px;
+  border-radius: 3px;
+  background: #ffffff;
+  cursor: pointer;
 }
 </style>

@@ -6,4 +6,5 @@ class Book < ApplicationRecord
   validates :bookid, presence: true, uniqueness: true
 
   belongs_to :author
+  has_one :rakuten_book_info
 end

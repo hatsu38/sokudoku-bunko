@@ -1,0 +1,57 @@
+.card-image{
+  .image{
+    img{
+      height: 231px;
+    }
+  }
+}
+
+.book-title{
+  padding: 5px 4px;
+  height: 54px;
+}
+
+.section{
+  padding: .1rem .6rem;
+}
+.book-infos{
+  margin: .5rem 1rem 0;
+}
+
+.rakuten-purchace{
+  background-color: #668ad8;
+  box-shadow: 0 5px 0 0 #627295;
+  border-radius: 4px;
+  max-width: 80%;
+  margin: .5em auto 1.2rem;
+  line-height: 1.4;
+  transition: all .2s ease;
+  &:hover{
+    box-shadow: none;
+    transform: translateY(5px);
+    opacity: 0.8;
+  }
+  .rakuten-link{
+    padding: 0.5em;
+    .fa-angle-right{
+      float: right;
+      font-size: 1.5rem;
+    }
+  }
+}
+
+.caption{
+  margin: 1rem auto 0;
+  overflow: hidden;
+  p{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+  }
+}
+#more-read-button{
+  margin-bottom: 10px;
+}
+#close-read-button{
+  display: none;
+}

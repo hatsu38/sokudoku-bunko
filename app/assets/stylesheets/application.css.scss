@@ -13,11 +13,15 @@
  *= require_self
  */
 @import "../node_modules/bulma/bulma.sass";
+@import "font-awesome-sprockets";
+@import "font-awesome";
 
+.light-border-bottom{
+  border-bottom: 1px solid #dedede;
+}
 .site-name{
   margin: .5rem;
 }
-
-nav{
-  border-bottom: 1px solid #dedede;
+.push-top{
+  margin-top: 10px;
 }

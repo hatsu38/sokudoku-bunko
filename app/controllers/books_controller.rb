@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class BooksController < ApplicationController
-  require 'natto'
-
   def index
     @books = Book.all.limit(30).includes(:author)
   end
