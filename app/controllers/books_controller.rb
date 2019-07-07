@@ -7,5 +7,6 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find_by(id: params[:id])
+    @sentence = IO.read("db/txt/#{@book.txt_file}")
   end
 end

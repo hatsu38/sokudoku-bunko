@@ -55,3 +55,26 @@
 #close-read-button{
   display: none;
 }
+
+.vertical-sentence{
+  writing-mode: vertical-rl;
+  -ms-writing-mode: tb-rl;
+  max-width: 100%;
+  height: 450px;
+  overflow: hidden;
+  padding: 25px 10px;
+  overflow-x: auto;
+  line-height: 2.2rem;
+  h2{
+    margin-top: 0;
+    margin-left: 15px;
+  }
+  .mask{
+    position: absolute;
+    left: 0;
+    opacity: .8;
+    width: 28%;
+    height: 450px;
+    z-index: 5;
+  }
+}
