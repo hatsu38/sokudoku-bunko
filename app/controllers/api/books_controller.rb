@@ -3,7 +3,7 @@
 class Api::BooksController < ApplicationController
   require 'natto'
   def index
-    @books = Book.order(id: 'DESC')
+    @books = Book.efficiency_list.recent(30)
   end
 
   def show
@@ -12,5 +12,9 @@ class Api::BooksController < ApplicationController
       natto = Natto::MeCab.new
       @words = natto.enum_parse(f.read)
     end
+  end
+
+  def search
+    @books = Book.search(params[:title])
   end
 end

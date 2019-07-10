@@ -10,5 +10,6 @@ html
     script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
     = yield :css_each_page
   body
-    = render 'layouts/header'
+    - if search_path != request.path_info
+      = render 'layouts/header'
     = yield

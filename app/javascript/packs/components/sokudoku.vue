@@ -15,7 +15,7 @@
       <div class="mask has-background-white"></div>
     </div>
     <div id="sentence-text" class="vertical-sentence">
-      <h2 class="title is-5 has-text-weight-bold">{{words[0].text}}</h2>
+      <h2 class="title is-5 has-text-weight-bold">{{title}}</h2>
       <p>
         <span v-for="(word, idx) in words" :class="{'currentText': idx == currentNum }">{{word.text}}</span>
       </p>
@@ -35,6 +35,7 @@ export default {
   data: function () {
     return {
       words: [],
+      title: '',
       currentNum: 0,
       currentWord: '',
       reading: false,
@@ -45,9 +46,10 @@ export default {
     }
   },
   created: function () {
-    this.fetchTasks();
+    this.fetchWords();
   },
   updated: function(){
+    this.currentWord = this.words[0].text
     this.initialCurrentTextPosition = document.getElementById('sentence-text').scrollLeft
   },
   watch: {
@@ -63,10 +65,10 @@ export default {
     }
   },
   methods: {
-    fetchTasks: function () {
+    fetchWords: function () {
       axios.get(`/api/books/${this.$route.params.id}`).then((response) => {
+        this.title = response.data.title
         this.words = response.data.words
-        this.currentWord = this.words[0].text
       }, (error) => {
         console.log(error);
       });
