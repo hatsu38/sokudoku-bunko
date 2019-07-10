@@ -8,7 +8,7 @@ class Book < ApplicationRecord
   belongs_to :author
   has_one :rakuten_book_info
 
-  scope :recent, -> (count) { order(id: :desc).limit(count) }
+  scope :recent, ->(count) { order(id: :desc).limit(count) }
   scope :efficiency_list, -> { select('id', 'title', 'author_id').includes(:author, :rakuten_book_info) }
 
   def self.search(search)
