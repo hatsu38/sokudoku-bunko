@@ -7,5 +7,6 @@ Rails.application.routes.draw do
   resources :authors, only: %i[index show]
   namespace :api, format: 'json' do
     resources :books, only: %i[index show]
+    get :search, to: 'books#search'
   end
 end
