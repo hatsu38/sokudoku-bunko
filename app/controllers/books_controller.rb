@@ -2,11 +2,15 @@
 
 class BooksController < ApplicationController
   def index
-    @books = Book.select('id', 'title', 'author_id').limit(30).includes(:author)
+    @books = Book.efficiency_list.recent(30)
   end
 
   def show
     @book = Book.find_by(id: params[:id])
     @sentence = IO.read("db/txt/#{@book.txt_file}")
+  end
+
+  def search
+    @books = Book.search(params[:title])
   end
 end

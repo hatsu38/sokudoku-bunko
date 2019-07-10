@@ -19,9 +19,26 @@
 .light-border-bottom{
   border-bottom: 1px solid #dedede;
 }
-.site-name{
+.small_margin{
   margin: .5rem;
 }
 .push-top{
   margin-top: 10px;
+}
+.push-side{
+  margin-right: 10px;
+  margin-left: 10px;
+}
+.is-none{
+  display: none;
+}
+.header-line-hight{
+  line-height: 52px;
+}
+.navbar_left{
+  width: 88%;
+}
+.navbar_right{
+  font-size: 1.25rem;
+  width: 12%;
 }
