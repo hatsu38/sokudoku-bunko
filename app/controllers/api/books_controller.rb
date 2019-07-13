@@ -2,8 +2,9 @@
 
 class Api::BooksController < ApplicationController
   require 'natto'
+  PER = 20
   def index
-    @books = Book.efficiency_list.recent(30)
+    @books = Book.efficiency_list.page(params[:page]).per(PER).order(id: :desc)
   end
 
   def show
