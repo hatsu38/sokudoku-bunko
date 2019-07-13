@@ -13,6 +13,8 @@ class Api::BooksController < ApplicationController
       natto = Natto::MeCab.new
       @words = natto.enum_parse(f.read)
     end
+    rescue StandardError => e
+      logger.warn(e.inspect)
   end
 
   def search
