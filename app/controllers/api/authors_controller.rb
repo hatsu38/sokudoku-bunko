@@ -4,7 +4,7 @@ class Api::AuthorsController < ApplicationController
   PER = 20
   def index
     @authors = Author.page(params[:page]).per(PER)
-    render json: { 'authors': @authors}
+    render json: { 'authors': @authors }
   end
 
   def show
