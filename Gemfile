@@ -5,9 +5,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.3'
 
-gem 'kaminari'
 gem 'amazon-ecs'
 gem 'font-awesome-sass'
+gem 'kaminari'
 gem 'natto'
 gem 'rakuten_web_service'
 gem 'rubyzip'
@@ -68,11 +68,12 @@ group :development do
 end
 
 group :test do
+  gem 'factory_bot_rails'
+  gem 'rspec-rails'
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
+  gem 'rails-controller-testing'
   gem 'selenium-webdriver'
-  # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'chromedriver-helper'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
