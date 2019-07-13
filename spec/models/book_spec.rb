@@ -33,7 +33,7 @@ RSpec.describe Book, type: :model do
     end
   end
 
-  describe "scope" do
+  describe 'scope' do
     let!(:books) { create_list(:book, 3) }
     describe 'recent' do
       it 'work' do
