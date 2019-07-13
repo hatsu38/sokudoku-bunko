@@ -49,7 +49,6 @@ export default {
     this.fetchWords();
   },
   updated: function(){
-    this.currentWord = this.words[0].text
     this.initialCurrentTextPosition = document.getElementById('sentence-text').scrollLeft
   },
   watch: {
@@ -69,6 +68,7 @@ export default {
       axios.get(`/api/books/${this.$route.params.id}`).then((response) => {
         this.title = response.data.title
         this.words = response.data.words
+        this.currentWord = this.title
       }, (error) => {
         console.log(error);
       });

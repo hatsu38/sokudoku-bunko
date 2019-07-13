@@ -1,11 +1,6 @@
 <template>
   <section class="section">
     <div class="container">
-      <article class="message is-success" v-if="keyword">
-        <div class="message-body">
-          <strong>{{keyword}}</strong> の検索結果：{{ books.length }}件
-        </div>
-      </article>
       <div class="columns is-mobile is-multiline">
         <div v-for="(book, idx) in books" class="column is-half">
           <div class="card">
@@ -24,6 +19,11 @@
             </a>
           </div>
         </div>
+        <infinite-loading @infinite="infiniteHandler">
+          <!-- slotでメッセージをカスタマイズできる -->
+          <div slot="no-more"></div>
+          <div slot="no-results"></div>
+        </infinite-loading>
       </div>
     </div>
   </section>
@@ -32,35 +32,53 @@
 <script>
 import axios from 'axios'
 import Router from '../router'
+import InfiniteLoading from "vue-infinite-loading";
 
 export default {
-  props: ['keyword'],
+  components: {
+    InfiniteLoading
+  },
   data: function () {
     return {
       books: [],
+      page: 1,
     }
   },
-  created: function () {
+  created() {
     this.fetchBooks();
   },
-  watch: {
-    keyword: function(){
-      this.fetchBooks();
-    }
-  },
   methods: {
-    fetchBooks: function () {
-      axios.get(`/api/search?title=${this.keyword}`).then((response) => {
-        this.books = response.data.books
+    fetchBooks() {
+      axios.get(`/api/books?page=${this.page}`).then((response) => {
+        this.books.push(...response.data.books)
+        this.page++
       }, (error) => {
         console.log(error);
       });
-    }
-  }
+    },
+    async infiniteHandler($state) {
+      await axios.get(`/api/books?page=${this.page}`).then((response) => {
+        if(response.data.books.length) {
+          this.books.push(...response.data.books)
+          this.page++
+          $state.loaded()
+        } else {
+          $state.complete();
+        }
+      }, (error) => {
+        console.log(error);
+        $state.complete();
+      });
+    },
+  },
 }
 </script>
 
 <style>
+.infinite-loading-container{
+  width: 100%;
+  margin: 1rem auto 2rem;
+}
 .card-image > .image > img{
   height: 231px;
 }
