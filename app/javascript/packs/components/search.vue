@@ -18,11 +18,11 @@
         そくどく文庫は、本を読むのが遅い人でも楽に本を読む速度が早くなるサイトです📖
       </p>
     </div>
-    <booklists :keyword="keyword"></booklists>
+    <searchedBooks :keyword="keyword" />
   </div>
 </template>
 <script>
-import booklists from './booklists'
+import searchedBooks from './searchedBooks'
 export default {
   data() {
     return {
@@ -30,7 +30,7 @@ export default {
     }
   },
   components: {
-    'booklists': booklists
+    'searchedBooks': searchedBooks
   }
 }
 </script>

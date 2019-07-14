@@ -1,8 +1,7 @@
 - content_for :css_each_page, stylesheet_link_tag('books')
 section.section
   .container
-    h1.title.has-text-centered.is-4 = @author.name
-section.section.push-top
-  .container
-    .columns.is-mobile.is-multiline
-      = render 'books/books', books: @author.books
+    h1.title.has-text-centered.is-4.push-bottom = @author.name
+#books
+  books
+= javascript_pack_tag "books"
