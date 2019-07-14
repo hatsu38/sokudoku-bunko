@@ -18,6 +18,6 @@ class Api::BooksController < ApplicationController
   end
 
   def search
-    @books = Book.search(params[:title])
+    @books = Book.search(params[:title]).page(params[:page]).per(PER).order(id: :desc)
   end
 end
