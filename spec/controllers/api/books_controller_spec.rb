@@ -29,4 +29,12 @@ describe Api::BooksController, type: :controller do
       expect(response.status).to eq(200)
     end
   end
+
+  describe 'get #ranking' do
+    it 'work' do
+      get :ranking, format: :json
+      expect(response.status).to eq(200)
+      expect(assigns(:books).pluck(:id)).to match_array(Ranking.order(rank: :asc).pluck(:book_id))
+    end
+  end
 end

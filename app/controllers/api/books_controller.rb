@@ -20,4 +20,8 @@ class Api::BooksController < ApplicationController
   def search
     @books = Book.search(params[:title]).page(params[:page]).per(PER).order(id: :desc)
   end
+
+  def ranking
+    @books = Book.where(id: Ranking.page(params[:page]).per(PER).select(:book_id).order(rank: :asc)).includes(:author, :rakuten_book_info)
+  end
 end

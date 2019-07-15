@@ -1,6 +1,7 @@
 <template>
   <section class="section">
     <div class="container">
+      <h2 class="subtitle has-text-weight-bold section-title">小説一覧</h2>
       <booksLists :path="path" />
     </div>
   </section>
@@ -34,3 +35,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.section-title{
+  margin-top: 20px;
+}
+</style>
