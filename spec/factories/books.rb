@@ -11,5 +11,8 @@ FactoryBot.define do
     after(:create) do |book|
       create(:rakuten_book_info, book: book)
     end
+    after(:create) do |book|
+      create(:ranking, book: book)
+    end
   end
 end

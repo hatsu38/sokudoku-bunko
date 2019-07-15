@@ -31,6 +31,10 @@ RSpec.describe Book, type: :model do
     it 'is has_on RakutenBookInfo' do
       expect(book.rakuten_book_info).to be_present
     end
+
+    it 'is has_on ranking' do
+      expect(book.ranking).to be_present
+    end
   end
 
   describe 'scope' do
