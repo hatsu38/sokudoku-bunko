@@ -3,12 +3,43 @@
 require 'zip'
 require 'csv'
 require 'open-uri'
+require 'mechanize'
 
 WORK_TITLE = '作品名'
 WORK_TXT_ZIP_URL = 'テキストファイルURL'
 base_dir = 'db/txt/'
+RANKING_URL = "https://www.aozora.gr.jp/access_ranking/2019_04_xhtml.html"
+
+
+def get_top_rank_books(rank)
+  agent = Mechanize.new
+  page = agent.get(RANKING_URL)
+  trs = page.search('table.list tbody tr')
+  top_rank_books = []
+  trs.each_with_index do |tr, i|
+    book_link_tag = tr.at('.normal a')
+    next if book_link_tag.nil?
+    card_num = get_card_num(book_link_tag)
+    top_rank_books.push(card_num) if card_num
+    return top_rank_books if i > rank
+  end
+end
+
+def get_card_num(book_link_tag)
+  book_link = book_link_tag.get_attribute(:href)
+  card_num_html = book_link.match(/card\d+\.html/)
+  return nil if card_num_html.nil?
+  card_num = card_num_html[0].match(/\d+/)
+  return nil if card_num.nil?
+  card_num[0].to_i
+end
+
+
+top_rank_books = get_top_rank_books(10)
 
 CSV.foreach('db/list_person_all_extended_utf8.csv', headers: true).with_index do |row, i|
+  # next unless top_rank_books.include?(row['作品ID'].to_i)
+  # puts i
   URI.parse(URI.escape(row[WORK_TXT_ZIP_URL])).open do |file|
     Zip::File.open_buffer(file.read) do |zip|
       zip.each do |entry|
