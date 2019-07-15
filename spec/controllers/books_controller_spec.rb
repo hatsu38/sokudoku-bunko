@@ -31,4 +31,12 @@ describe BooksController, type: :controller do
       expect(response).to render_template :search
     end
   end
+
+  describe 'get #ranking' do
+    it 'work' do
+      get :ranking
+      expect(response.status).to eq(200)
+      expect(response).to render_template :ranking
+    end
+  end
 end
