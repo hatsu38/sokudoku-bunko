@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_40_044442) do
+ActiveRecord::Schema.define(version: 2019_07_40_044443) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,15 @@ ActiveRecord::Schema.define(version: 2019_07_40_044442) do
     t.index ["book_id"], name: "index_rakuten_book_infos_on_book_id"
   end
 
+  create_table "rankings", force: :cascade do |t|
+    t.integer "rank", null: false
+    t.bigint "book_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_rankings_on_book_id"
+  end
+
   add_foreign_key "books", "authors"
   add_foreign_key "rakuten_book_infos", "books"
+  add_foreign_key "rankings", "books"
 end
