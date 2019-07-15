@@ -35,7 +35,7 @@ def get_card_num(book_link_tag)
 end
 
 
-top_rank_books = get_top_rank_books(10)
+# top_rank_books = get_top_rank_books(30)
 
 CSV.foreach('db/list_person_all_extended_utf8.csv', headers: true).with_index do |row, i|
   # next unless top_rank_books.include?(row['作品ID'].to_i)
@@ -60,7 +60,7 @@ CSV.foreach('db/list_person_all_extended_utf8.csv', headers: true).with_index do
         end
 
         if book.rakuten_book_info.nil?
-          item = RakutenWebService::Ichiba::Item.search(keyword: book.title) ? RakutenWebService::Ichiba::Item.search(keyword: book.title).first : nil
+          item = RakutenWebService::Ichiba::Item.search(keyword: book.title) ? RakutenWebService::Ichiba::Item.search(keyword: book.title + " 文庫 " + book.author.name).first : nil
           small_image_url = item['smallImageUrls'] ? item['smallImageUrls'][0] : nil
           medium_image_url = item['mediumImageUrls'] ? item['mediumImageUrls'][0] : nil
           if item
