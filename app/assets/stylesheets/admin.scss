@@ -17,6 +17,7 @@
 
 .table{
   td {
+    word-break: break-all;
     > figure{
       max-width: 100%;
       max-height: 100%;
