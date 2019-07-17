@@ -91,4 +91,18 @@ describe Admin::BooksController, type: :controller do
       end
     end
   end
+
+  describe 'GET searh' do
+    let!(:book) { create(:book, title: 'Result') }
+    let!(:author) { create(:author, name: 'Result') }
+    it 'works' do
+      get :search, params: { keyword: 'Resu' }
+      expect(response.status).to eq(200)
+      expect(assigns(:books).first.title).to eq('Result')
+      expect(assigns(:authors).first.name).to eq('Result')
+      expect(assigns(:books).count).to eq(1)
+      expect(assigns(:authors).count).to eq(1)
+      expect(response).to render_template :search
+    end
+  end
 end

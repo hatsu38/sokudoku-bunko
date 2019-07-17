@@ -6,10 +6,6 @@ class Admin::BooksController < AdminController
     @books = Book.includes(:author, :rakuten_book_info).page(params[:page]).per(PER).order(id: :desc)
   end
 
-  def search
-    @books = Book.search(params[:title])
-  end
-
   def show
     @book = Book.find_by(id: params[:id])
   end
@@ -27,6 +23,11 @@ class Admin::BooksController < AdminController
       flash[:danger] = '更新に失敗しました'
       render 'edit'
     end
+  end
+
+  def search
+    @authors = Author.search(params[:keyword])
+    @books = Book.search(params[:keyword])
   end
 
   private

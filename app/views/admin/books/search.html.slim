@@ -1,9 +1,5 @@
 - content_for :css_each_page, stylesheet_link_tag('books')
+- content_for :css_each_page, stylesheet_link_tag('admin')
 
-#searchPage
-  search
-= javascript_pack_tag 'search'
-
-sass:
-  .small_margin
-    margin-right: 0
+= render 'admin/authors/authors_lists', authors: @authors
+= render 'admin/books/books_lists', books: @books

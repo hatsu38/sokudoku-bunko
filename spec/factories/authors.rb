@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :author do
-    sequence(:name) { |n| "Title_#{n}" }
+    sequence(:name) { |n| "Name_#{n}" }
     birthday { Date.today }
     sequence(:authorid) { |n| n }
 

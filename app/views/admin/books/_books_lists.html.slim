@@ -1,0 +1,19 @@
+table.table.is-fullwidth.is-hoverable.is-bordered
+  thead
+    tr
+      th 著書名
+      th 著者名
+      th 画像
+      th 編集
+  tbody
+    - books.each_with_index do |book, i|
+      tr
+        td = link_to book.title, admin_book_path(book)
+        td = link_to book.author.name, edit_admin_author_path(book.author)
+        td
+          figure.image
+            - if book.rakuten_book_info.try(:medium_image_url)
+              = image_tag book.rakuten_book_info.medium_image_url
+            - else
+              = image_tag '/no_image.png' ,class: ''
+        td = link_to '編集', edit_admin_book_path(book)

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    get :search, to: 'books#search'
     get '/', to: 'books#index'
     resources :books, only: %i[index show edit update]
     get :search, to: 'books#search'
