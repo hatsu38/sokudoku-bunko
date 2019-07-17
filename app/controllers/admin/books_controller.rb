@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Admin::BooksController < AdminController
-  PER = 10
+  PER = 20
   def index
     @books = Book.includes(:author, :rakuten_book_info).page(params[:page]).per(PER).order(id: :desc)
   end
@@ -21,8 +21,10 @@ class Admin::BooksController < AdminController
   def update
     @book = Book.find_by(id: params[:id])
     if @book.update(book_params)
+      flash[:success] = '更新しました'
       redirect_to admin_book_path(@book)
     else
+      flash[:danger] = '更新に失敗しました'
       render 'edit'
     end
   end

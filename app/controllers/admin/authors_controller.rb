@@ -17,8 +17,10 @@ class Admin::AuthorsController < AdminController
   def update
     @author = Author.find_by(id: params[:id])
     if @author.update(author_params)
+      flash[:success] = '更新しました'
       redirect_to admin_author_path(@author)
     else
+      flash[:danger] = '更新に失敗しました'
       render 'edit'
     end
   end
