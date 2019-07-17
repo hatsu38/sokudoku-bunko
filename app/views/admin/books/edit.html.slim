@@ -12,7 +12,7 @@ section.section
       .field
         = book.label :published, '公開日', class: 'label'
         .control
-          = book.text_field :published, class: 'input'
+          = book.date_field :published, class: 'input'
       = book.fields_for :rakuten_book_info do |rakuten_book_info|
         .field
           = rakuten_book_info.label :price, '値段', class: 'label'

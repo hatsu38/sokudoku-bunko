@@ -1,7 +1,14 @@
-- content_for :css_each_page, stylesheet_link_tag('books')
 section.section
   .container
-    h1.title.has-text-centered.is-4.push-bottom = @author.name
-#books
-  books
-= javascript_pack_tag "books"
+    table.table.is-fullwidth.is-hoverable.is-bordered
+      tbody
+        tr
+          th 著者
+          td = link_to @author.name, admin_author_path(@author)
+        tr
+          th 著者の誕生日
+          td = @author.birthday
+        tr
+          th 本の数
+          td = @author.books.count
+    = link_to '編集する', edit_admin_author_path(@author), class: 'button is-success'

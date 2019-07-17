@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Admin::BooksController < ApplicationController
+class Admin::BooksController < AdminController
   PER = 10
   def index
     @books = Book.includes(:author, :rakuten_book_info).page(params[:page]).per(PER).order(id: :desc)
@@ -10,18 +10,19 @@ class Admin::BooksController < ApplicationController
     @books = Book.search(params[:title])
   end
 
+  def show
+    @book = Book.find_by(id: params[:id])
+  end
+
   def edit
     @book = Book.find_by(id: params[:id])
   end
 
   def update
-    @book = Book.fb1qind(params[:id])
-    # binding.pry
+    @book = Book.find_by(id: params[:id])
     if @book.update(book_params)
-      # updateが完了したら一覧ページへリダイレクト
-      redirect_to admin_books_path
+      redirect_to admin_book_path(@book)
     else
-      # updateを失敗すると編集ページへ
       render 'edit'
     end
   end
@@ -30,6 +31,6 @@ class Admin::BooksController < ApplicationController
 
   def book_params
     params.require(:book).permit(:title, :txt_file, :published,
-      rakuten_book_info_attributes: [:id, :price, :affiliate_url, :small_image_url, :medium_image_url])
+                                 rakuten_book_info_attributes: %i[id price affiliate_url small_image_url medium_image_url])
   end
 end

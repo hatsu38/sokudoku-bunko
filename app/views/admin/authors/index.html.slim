@@ -1,4 +1,17 @@
-h1 著者一覧
-ul
-  - @authors.each do |author|
-    li = link_to author.name, author_path(author)
+- content_for :css_each_page, stylesheet_link_tag('books')
+- content_for :css_each_page, stylesheet_link_tag('admin')
+table.table.is-fullwidth.is-hoverable.is-bordered
+  thead
+    tr
+      th 著者名
+      th 誕生日
+      th 本の数
+      th 編集
+  tbody
+    - @authors.each_with_index do |author, i|
+      tr
+        td = link_to author.name, author_path(author)
+        td = author.birthday
+        td = author.books.count
+        td = link_to '編集', edit_admin_author_path(author)
+  = paginate @authors

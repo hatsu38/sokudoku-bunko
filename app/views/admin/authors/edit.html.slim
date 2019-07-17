@@ -1,0 +1,12 @@
+section.section
+  .container
+    = form_with model: @author, url: admin_author_path do |author|
+      .field
+        = author.label :name, '著者名', class: 'label'
+        .control
+          = author.text_field :name, class: 'input'
+      .field
+        = author.label :birthday, '誕生日', class: 'label'
+        .control
+          = author.date_field :birthday, class: 'input'
+      = author.submit '修正', data: { confirm: 'データを更新してよろしいですか？'}, class: 'button is-primary'

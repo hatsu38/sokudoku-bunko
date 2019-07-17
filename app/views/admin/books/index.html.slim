@@ -10,8 +10,8 @@ table.table.is-fullwidth.is-hoverable.is-bordered
   tbody
     - @books.each_with_index do |book, i|
       tr
-        td = link_to book.title, book_path(book)
-        td = book.author.name
+        td = link_to book.title, admin_book_path(book)
+        td = link_to book.author.name, edit_admin_author_path(book.author)
         td
           figure.image
             - if book.rakuten_book_info.try(:medium_image_url)

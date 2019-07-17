@@ -16,8 +16,8 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get '/', to: 'books#index'
-    resources :books
+    resources :books, only: %i[index show edit update]
     get :search, to: 'books#search'
-    resources :authors
+    resources :authors, only: %i[index show edit update]
   end
 end
