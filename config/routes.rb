@@ -13,4 +13,11 @@ Rails.application.routes.draw do
     get :ranking, to: 'books#ranking'
     resources :authors, only: %i[index show]
   end
+
+  namespace :admin do
+    get '/', to: 'books#index'
+    resources :books
+    get :search, to: 'books#search'
+    resources :authors
+  end
 end
