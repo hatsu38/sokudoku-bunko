@@ -1,0 +1,34 @@
+- content_for :css_each_page, stylesheet_link_tag('admin')
+section.section
+  .container
+    = form_with model: @book, url: admin_book_path do |book|
+      .field
+        = book.label :title, 'タイトル', class: 'label'
+        .control
+          = book.text_field :title, class: 'input'
+      .field
+        = book.label :txt_file, 'txtファイルのPath', class: 'label'
+        .control
+          = book.text_field :txt_file, class: 'input'
+      .field
+        = book.label :published, '公開日', class: 'label'
+        .control
+          = book.date_field :published, class: 'input'
+      = book.fields_for :rakuten_book_info do |rakuten_book_info|
+        .field
+          = rakuten_book_info.label :price, '値段', class: 'label'
+          = rakuten_book_info.text_field :price, class: 'input'
+        .field
+          = rakuten_book_info.label :affiliate_url, 'アフィリエイトURL', class: 'label'
+          = rakuten_book_info.text_field :affiliate_url, class: 'input'
+        .field
+          = rakuten_book_info.label :small_image_url, '小さい画像のURL', class: 'label'
+          = rakuten_book_info.text_field :small_image_url, class: 'input'
+          - if rakuten_book_info.object.try(:small_image_url)
+            = image_tag rakuten_book_info.object.try(:small_image_url)
+        .field
+          = rakuten_book_info.label :medium_image_url, '中くらいの画像のURL', class: 'label'
+          = rakuten_book_info.text_field :medium_image_url, class: 'input'
+          - if rakuten_book_info.object.try(:medium_image_url)
+            = image_tag rakuten_book_info.object.try(:medium_image_url)
+      = book.submit '修正', data: { confirm: 'データを更新してよろしいですか？'}, class: 'button is-primary'

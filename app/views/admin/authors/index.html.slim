@@ -1,0 +1,4 @@
+- content_for :css_each_page, stylesheet_link_tag('admin')
+
+= render 'admin/authors/authors_lists', authors: @authors
+= paginate @authors

@@ -29,7 +29,7 @@ export default {
       } else if ( url.startsWith('/authors')) {
         this.path = `/api/${url}?`
       } else {
-        this.path = `/api/${url}?`
+        this.path = '/api/books/?'
       }
     }
   }

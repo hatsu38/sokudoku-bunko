@@ -1,6 +1,6 @@
 <template>
   <div class="columns is-mobile is-multiline">
-    <div v-for="(book, idx) in books" class="column is-half">
+    <div v-for="(book, idx) in books" class="column is-6-mobile is-3-tablet is-2-desktop">
       <div class="card">
         <div class="card-image light-border-bottom">
           <figure class="image" v-if="book.rakuten_book_info">
