@@ -9,6 +9,7 @@ nav.light-border-bottom.navbar
     .navbar-start
       = link_to '本一覧', admin_books_path, class: 'navbar-item'
       = link_to '著者一覧', admin_authors_path, class: 'navbar-item'
+      = link_to 'ログアウト', destroy_user_session_path, method: :delete, data: { confirm: '管理画面からログアウトしますか？' }, class: 'navbar-item'
       = form_with method: :get, url: admin_search_path, local: true do |form|
         = form.text_field :keyword, class: 'input', value: params[:keyword]
 javascript:

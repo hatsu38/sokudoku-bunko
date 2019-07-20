@@ -6,6 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.5.3'
 
 gem 'amazon-ecs'
+gem 'devise'
 gem 'font-awesome-sass'
 gem 'kaminari'
 gem 'mechanize'
