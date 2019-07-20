@@ -10,8 +10,12 @@ class Api::BooksController < ApplicationController
   def show
     @book = Book.find_by(id: params[:id])
     File.open("db/txt/#{@book.txt_file}", 'r') do |f|
+      sentence = f.read
       natto = Natto::MeCab.new
-      @words = natto.enum_parse(f.read)
+      page = params[:page].to_i
+      pre_sentence = 800 * (page - 1)
+      sentence.slice!(0..pre_sentence-1) if pre_sentence > 0
+      @words = natto.enum_parse(sentence.truncate(800, omission: ''))
     end
   rescue StandardError => e
     logger.warn(e.inspect)
