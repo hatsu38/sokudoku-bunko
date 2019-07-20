@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe Admin::BooksController, type: :controller do
-  let!(:books) { create_list(:book, 3) }
+  let!(:books) { create_list(:book, 2) }
   context 'login' do
     let!(:admin) { create(:user) }
     before(:each) { login_admin(admin) }

@@ -23,6 +23,29 @@ h1.title.has-text-centered.is-4 = @book.title
   sokudoku
 = javascript_pack_tag 'read'
 
+- if @book.author.books
+  section.section.recomend_books
+    .container
+      h2.subtitle.has-text-weight-bold.has-text-centered
+        = @book.author.name
+        | の本一覧
+      .columns.is-mobile.is-multiline
+        = render 'books/books', books: @book.author.books
+
+section.section.push-top
+  .container
+    h2.subtitle.has-text-weight-bold 人気小説
+    .columns.is-mobile.is-multiline
+      = render 'books/books', books: @rankings
+    p.has-text-weight-bold.has-text-centered.to-ranking
+      = link_to ranking_path do
+        | もっと見る
+        i.fas.fa-chevron-right
+
+#books
+  books
+= javascript_pack_tag "books"
+
 javascript:
   var moreReadButton = document.getElementById("more-read-button");
   var closeReadButton = document.getElementById("close-read-button");

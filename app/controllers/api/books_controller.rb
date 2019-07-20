@@ -14,7 +14,7 @@ class Api::BooksController < ApplicationController
       natto = Natto::MeCab.new
       page = params[:page].to_i
       pre_sentence = 800 * (page - 1)
-      sentence.slice!(0..pre_sentence-1) if pre_sentence > 0
+      sentence.slice!(0..pre_sentence - 1) if pre_sentence.positive?
       @words = natto.enum_parse(sentence.truncate(800, omission: ''))
     end
   rescue StandardError => e

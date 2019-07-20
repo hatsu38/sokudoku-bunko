@@ -3,13 +3,14 @@
 require 'rails_helper'
 
 describe BooksController, type: :controller do
-  let!(:books) { create_list(:book, 3) }
+  let!(:books) { create_list(:book, 2) }
 
   describe 'GET index' do
     it 'works' do
       get :index
       expect(response.status).to eq(200)
       expect(assigns(:books).pluck(:id)).to match_array(Book.all.pluck(:id))
+      expect(assigns(:rankings).pluck(:id)).to match_array(Book.all.pluck(:id))
     end
   end
 
@@ -17,6 +18,7 @@ describe BooksController, type: :controller do
     it 'work' do
       get :show, params: { id: books.first.id }
       expect(assigns(:book)).to eq(books.first)
+      expect(assigns(:rankings).pluck(:id)).to match_array(Book.all.pluck(:id))
       expect(response.status).to eq(200)
       expect(response).to render_template :show
     end
@@ -35,6 +37,7 @@ describe BooksController, type: :controller do
   describe 'get #ranking' do
     it 'work' do
       get :ranking
+      expect(assigns(:rankings).pluck(:id)).to match_array(Book.all.pluck(:id))
       expect(response.status).to eq(200)
       expect(response).to render_template :ranking
     end

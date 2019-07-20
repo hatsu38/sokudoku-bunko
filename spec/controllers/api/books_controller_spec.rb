@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe Api::BooksController, type: :controller do
-  let!(:books) { create_list(:book, 3) }
+  let!(:books) { create_list(:book, 2) }
 
   describe 'GET index' do
     it 'works' do
