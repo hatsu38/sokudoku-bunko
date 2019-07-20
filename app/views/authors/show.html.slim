@@ -1,7 +1,15 @@
 - content_for :css_each_page, stylesheet_link_tag('books')
-section.section
-  .container
-    h1.title.has-text-centered.is-4.push-bottom = @author.name
+h1.title.has-text-centered.is-4.push-top = @author.name
 #books
   books
 = javascript_pack_tag "books"
+
+section.section.push-top
+  .container
+    h2.subtitle.has-text-weight-bold 人気小説
+    .columns.is-mobile.is-multiline
+      = render 'books/books', books: @rankings
+    p.has-text-weight-bold.has-text-centered.to-ranking
+      = link_to ranking_path do
+        | もっと見る
+        i.fas.fa-chevron-right
