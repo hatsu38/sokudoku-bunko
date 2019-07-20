@@ -3,7 +3,6 @@
 class BooksController < ApplicationController
   def index
     @books = Book.efficiency_list.recent(30)
-    # binding.pry
     @rankings = Book.where(id: Ranking.order(rank: :asc).limit(10).select(:book_id)).includes(:author, :rakuten_book_info)
   end
 

@@ -19,6 +19,7 @@
       <p>
         <span v-for="(word, idx) in words" :class="{'currentText': idx == currentNum }">{{word.text}}</span>
       </p>
+      <p @click="moreSentence" id="sentence-more-read">もっと読み込む</p>
     </div>
   </div>
 </template>
@@ -36,6 +37,7 @@ export default {
     return {
       words: [],
       title: '',
+      page: 1,
       currentNum: 0,
       currentWord: '',
       reading: false,
@@ -56,6 +58,9 @@ export default {
       if(this.currentNum % 10 == 0){
         this.getCurrentTextPosition()
       }
+      if(this.currentNum >= this.words.length - 50){
+        this.moreSentence()
+      }
     },
     currentTextPosition: function(){
       if(this.currentTextPosition < 200 ){
@@ -65,10 +70,19 @@ export default {
   },
   methods: {
     fetchWords: function () {
-      axios.get(`/api/books/${this.$route.params.id}`).then((response) => {
+      axios.get(`/api/books/${this.$route.params.id}?page=${this.page}`).then((response) => {
         this.title = response.data.title
         this.words = response.data.words
         this.currentWord = this.title
+        this.page++
+      }, (error) => {
+        console.log(error);
+      });
+    },
+    moreSentence: function(){
+      axios.get(`/api/books/${this.$route.params.id}?page=${this.page}`).then((response) => {
+        this.words.push(...response.data.words)
+        this.page++
       }, (error) => {
         console.log(error);
       });
@@ -179,5 +193,9 @@ input[type=range]::-webkit-slider-thumb{
   height: 450px;
   z-index: 5;
 }
-
+#sentence-more-read{
+  z-index: 9;
+  position: relative;
+  color: #777777;
+}
 </style>
