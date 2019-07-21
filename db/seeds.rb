@@ -54,7 +54,7 @@ CSV.foreach('db/list_person_all_extended_utf8.csv', headers: true).with_index do
         if book.nil?
           published_str = row['底本初版発行年1'].gsub!(/（(.*?)）/,'')
           published = Date.strptime(published_str,'%Y年%m月%d日')
-          book = author.books.create!(title: row[WORK_TITLE], published: published, txt_file: save_path, bookid: row['作品ID'])
+          book = author.books.create!(title: row[WORK_TITLE], published: published, txt_file: save_path, zip_url: row[WORK_TXT_ZIP_URL], bookid: row['作品ID'])
           Dir.mkdir(base_dir + entry.name.delete('.txt'))
           zip.extract(entry, base_dir + save_path) { true }
         end
