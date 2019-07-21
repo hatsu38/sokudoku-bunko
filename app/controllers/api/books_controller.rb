@@ -37,7 +37,7 @@ class Api::BooksController < ApplicationController
 
   def download_txt(zip_url, txt_path)
     base_dir = 'db/txt/'
-    URI.parse(URI.escape(zip_url)).open do |file|
+    URI.parse(zip_url).open do |file|
       Zip::File.open_buffer(file.read) do |zip|
         zip.each do |entry|
           next unless entry.name.end_with?('.txt')

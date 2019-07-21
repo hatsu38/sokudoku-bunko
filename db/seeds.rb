@@ -40,7 +40,7 @@ end
 CSV.foreach('db/list_person_all_extended_utf8.csv', headers: true).with_index do |row, i|
   # next unless top_rank_books.include?(row['作品ID'].to_i)
   # puts i
-  URI.parse(URI.escape(row[WORK_TXT_ZIP_URL])).open do |file|
+  URI.parse(row[WORK_TXT_ZIP_URL]).open do |file|
     Zip::File.open_buffer(file.read) do |zip|
       zip.each do |entry|
         next unless entry.name.end_with?('.txt')

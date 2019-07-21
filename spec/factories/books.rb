@@ -5,6 +5,7 @@ FactoryBot.define do
     sequence(:title) { |n| "Title_#{n}" }
     sequence(:txt_file) { |n| "txt_file_#{n}" }
     published { Date.today }
+    sequence(:zip_url) { |n| "https://example.com/#{n}" }
     sequence(:bookid) { |n| n }
     association :author
 
