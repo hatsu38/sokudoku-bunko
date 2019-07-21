@@ -10,7 +10,7 @@
             <img src="/no_image.png">
           </figure>
         </div>
-        <a :href="'/books/'+book.id" class="content book-info">
+        <a :href="'/books/'+book.title" class="content book-info">
           <div class="book-title">
             {{ book.title }}
           </div>

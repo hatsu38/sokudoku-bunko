@@ -16,7 +16,7 @@ describe BooksController, type: :controller do
 
   describe 'get #show' do
     it 'work' do
-      get :show, params: { id: books.first.id }
+      get :show, params: { title: books.first.title }
       expect(assigns(:book)).to eq(books.first)
       expect(assigns(:rankings).pluck(:id)).to match_array(Book.all.pluck(:id))
       expect(response.status).to eq(200)

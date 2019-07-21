@@ -31,4 +31,4 @@ section.section
         tr
           th 著者の誕生日
           td = @book.author.birthday
-    = link_to '編集する', edit_admin_book_path(@book), class: 'button is-success'
+    = link_to '編集する', edit_admin_book_path(@book.title), class: 'button is-success'

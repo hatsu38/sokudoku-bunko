@@ -15,7 +15,7 @@ describe Api::AuthorsController, type: :controller do
 
   describe 'get #show' do
     it 'work' do
-      get :show, params: { id: authors.first.id }, format: :json
+      get :show, params: { name: authors.first.name }, format: :json
       expect(assigns(:author)).to eq(authors.first)
       expect(response.status).to eq(200)
     end

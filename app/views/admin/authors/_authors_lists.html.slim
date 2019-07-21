@@ -8,7 +8,7 @@ table.table.is-fullwidth.is-hoverable.is-bordered
   tbody
     - authors.each_with_index do |author, i|
       tr
-        td = link_to author.name, author_path(author)
+        td = link_to author.name, admin_author_path(author)
         td = author.birthday
         td = author.books.count
         td = link_to '編集', edit_admin_author_path(author)

@@ -7,6 +7,6 @@ Vue.use(VueRouter)
 export default new VueRouter({
   mode: 'history',
   routes: [
-    { path: '/books/:id(\\d+)', component: Sokudoku },
+    { path: '/books/:title', component: Sokudoku },
   ],
 })

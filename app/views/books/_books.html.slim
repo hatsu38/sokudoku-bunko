@@ -7,6 +7,6 @@
             = image_tag book.rakuten_book_info.medium_image_url
           - else
             = image_tag '/no_image.png'
-      = link_to book_path(book), class: 'content book-info' do
+      = link_to book_path(book.title), class: 'content book-info' do
         .book-title
           = book.title

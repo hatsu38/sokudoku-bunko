@@ -15,7 +15,7 @@ describe Api::BooksController, type: :controller do
 
   describe 'get #show' do
     it 'work' do
-      get :show, params: { id: books.first.id }, format: :json
+      get :show, params: { title: books.first.title }, format: :json
       expect(assigns(:book)).to eq(books.first)
       expect(response.status).to eq(200)
     end
