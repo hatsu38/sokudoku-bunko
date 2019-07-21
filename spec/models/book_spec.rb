@@ -38,7 +38,7 @@ RSpec.describe Book, type: :model do
   end
 
   describe 'scope' do
-    let!(:books) { create_list(:book, 3) }
+    let!(:books) { create_list(:book, 2) }
     describe 'recent' do
       it 'work' do
         expect(Book.recent(3).count).to eq(3)
@@ -57,7 +57,7 @@ RSpec.describe Book, type: :model do
 
   describe 'method' do
     describe 'search' do
-      let!(:books) { create_list(:book, 3) }
+      let!(:books) { create_list(:book, 2) }
       let!(:book) { create(:book, title: '羅生門') }
       context 'exist params' do
         it 'work' do

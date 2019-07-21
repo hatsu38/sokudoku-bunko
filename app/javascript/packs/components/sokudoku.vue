@@ -171,7 +171,7 @@ input[type=range]::-webkit-slider-thumb{
   writing-mode: vertical-rl;
   -ms-writing-mode: tb-rl;
   max-width: 100%;
-  height: 450px;
+  height: 500px;
   overflow: hidden;
   padding: 25px 10px;
   overflow-x: auto;
@@ -190,7 +190,7 @@ input[type=range]::-webkit-slider-thumb{
   left: 0;
   opacity: .8;
   width: 28%;
-  height: 450px;
+  height: 500px;
   z-index: 5;
 }
 #sentence-more-read{
