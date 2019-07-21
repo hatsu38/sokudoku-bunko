@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2019_07_40_044444) do
     t.string "title", null: false
     t.string "txt_file", null: false
     t.date "published"
+    t.string "zip_url", null: false
     t.integer "bookid", null: false
     t.bigint "author_id"
     t.datetime "created_at", null: false
