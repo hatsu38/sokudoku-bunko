@@ -8,7 +8,7 @@ class Api::AuthorsController < ApplicationController
   end
 
   def show
-    @author = Author.find_by(id: params[:id])
+    @author = Author.find_by(name: params[:name])
     @books = @author.books.page(params[:page]).per(PER)
   end
 end

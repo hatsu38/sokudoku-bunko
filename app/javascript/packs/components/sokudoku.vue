@@ -70,7 +70,7 @@ export default {
   },
   methods: {
     fetchWords: function () {
-      axios.get(`/api/books/${this.$route.params.id}?page=${this.page}`).then((response) => {
+      axios.get(`/api/books/${this.$route.params.title}?page=${this.page}`).then((response) => {
         this.title = response.data.title
         this.words = response.data.words
         this.currentWord = this.title
@@ -80,7 +80,7 @@ export default {
       });
     },
     moreSentence: function(){
-      axios.get(`/api/books/${this.$route.params.id}?page=${this.page}`).then((response) => {
+      axios.get(`/api/books/${this.$route.params.title}?page=${this.page}`).then((response) => {
         this.words.push(...response.data.words)
         this.page++
       }, (error) => {

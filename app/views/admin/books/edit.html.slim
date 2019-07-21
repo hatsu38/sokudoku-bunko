@@ -1,7 +1,7 @@
 - content_for :css_each_page, stylesheet_link_tag('admin')
 section.section
   .container
-    = form_with model: @book, url: admin_book_path do |book|
+    = form_with model: @book, url: admin_book_path, local: true do |book|
       .field
         = book.label :title, 'タイトル', class: 'label'
         .control
