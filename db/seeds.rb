@@ -35,11 +35,11 @@ def get_card_num(book_link_tag)
 end
 
 
-# top_rank_books = get_top_rank_books(30)
+top_rank_books = get_top_rank_books(30)
 
 CSV.foreach('db/list_person_all_extended_utf8.csv', headers: true).with_index do |row, i|
-  # next unless top_rank_books.include?(row['作品ID'].to_i)
-  # puts i
+  next unless top_rank_books.include?(row['作品ID'].to_i)
+  puts i
   URI.parse(row[WORK_TXT_ZIP_URL]).open do |file|
     Zip::File.open_buffer(file.read) do |zip|
       zip.each do |entry|

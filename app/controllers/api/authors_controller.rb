@@ -9,6 +9,6 @@ class Api::AuthorsController < ApplicationController
 
   def show
     @author = Author.find_by(name: params[:name])
-    @books = @author.books.page(params[:page]).per(PER)
+    @books = @author.books.page(params[:page]).per(PER).includes(:author, :rakuten_book_info)
   end
 end
