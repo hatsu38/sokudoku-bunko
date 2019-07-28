@@ -17,7 +17,7 @@
         </a>
       </div>
     </div>
-    <infinite-loading spinner="waveDots" @infinite="infiniteHandler">
+    <infinite-loading spinner="waveDots" @infinite="infiniteHandler" :distance="500">
       <!-- slotでメッセージをカスタマイズできる -->
       <div slot="no-more"></div>
       <div slot="no-results"></div>
