@@ -17,7 +17,7 @@
         </a>
       </div>
     </div>
-    <infinite-loading spinner="waveDots" @infinite="infiniteHandler" :distance="500">
+    <infinite-loading spinner="waveDots" @infinite="infiniteHandler" :distance="1000">
       <!-- slotでメッセージをカスタマイズできる -->
       <div slot="no-more"></div>
       <div slot="no-results"></div>
@@ -40,21 +40,9 @@ export default {
       page: 1
     }
   },
-  created: function(){
-    this.fetchBooks()
-  },
   methods: {
-    fetchBooks: function () {
-      axios.get(`/api/books?`).then((response) => {
-        this.books = response.data.books
-      }, (error) => {
-        console.log(error);
-      });
-    },
-    infiniteHandler($state) {
-      console.log($state)
-      axios.get(`${this.path}?&page=${this.page}`).then((response) => {
-        console.log(response)
+    async infiniteHandler($state) {
+      await axios.get(`${this.path}?&page=${this.page}`).then((response) => {
         if(response.data.books.length > 0) {
           this.books.push(...response.data.books)
           this.page++
