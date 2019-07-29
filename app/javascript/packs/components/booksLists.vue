@@ -40,8 +40,12 @@ export default {
       page: 1
     }
   },
+  created: function(){
+    this.infiniteHandler($state)
+  },
   methods: {
     async infiniteHandler($state) {
+      console.log($state)
       await axios.get(`${this.path}&page=${this.page}`).then((response) => {
         if(response.data.books.length > 0) {
           this.books.push(...response.data.books)
