@@ -44,9 +44,10 @@ export default {
     this.infiniteHandler($state)
   },
   methods: {
-    async infiniteHandler($state) {
+    infiniteHandler($state) {
       console.log($state)
-      await axios.get('/api/books?&page='+this.page).then((response) => {
+      axios.get('/api/books?&page='+this.page).then((response) => {
+        console.log(response)
         if(response.data.books.length > 0) {
           this.books.push(...response.data.books)
           this.page++
