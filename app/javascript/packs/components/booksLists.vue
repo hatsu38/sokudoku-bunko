@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     fetchBooks: function () {
-      axios.get(`/api/search?title=${this.keyword}`).then((response) => {
+      axios.get(`/api/books?`).then((response) => {
         this.books = response.data.books
       }, (error) => {
         console.log(error);
