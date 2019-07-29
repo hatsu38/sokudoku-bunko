@@ -46,7 +46,7 @@ export default {
   methods: {
     async infiniteHandler($state) {
       console.log($state)
-      await axios.get(`${this.path}&page=${this.page}`).then((response) => {
+      await axios.get('/api/books?&page='+this.page).then((response) => {
         if(response.data.books.length > 0) {
           this.books.push(...response.data.books)
           this.page++

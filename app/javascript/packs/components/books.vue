@@ -25,11 +25,11 @@ export default {
     createPath() {
       const url = location.pathname
       if( url == '/') {
-        this.path = '/api/books/?'
+        this.path = '/api/books?'
       } else if ( url.startsWith('/authors')) {
         this.path = `/api/${url}?`
       } else {
-        this.path = '/api/books/?'
+        this.path = '/api/books?'
       }
     }
   }
