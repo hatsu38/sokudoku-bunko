@@ -41,12 +41,19 @@ export default {
     }
   },
   created: function(){
-    this.infiniteHandler($state)
+    this.fetchBooks()
   },
   methods: {
+    fetchBooks: function () {
+      axios.get(`/api/search?title=${this.keyword}`).then((response) => {
+        this.books = response.data.books
+      }, (error) => {
+        console.log(error);
+      });
+    },
     infiniteHandler($state) {
       console.log($state)
-      axios.get('/api/books?&page='+this.page).then((response) => {
+      axios.get(`${this.path}?&page=${this.page}`).then((response) => {
         console.log(response)
         if(response.data.books.length > 0) {
           this.books.push(...response.data.books)
