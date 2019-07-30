@@ -133,7 +133,6 @@ export default {
 .title{
   margin-top: 20px;
 }
-
 .currentText{
   background: #209cee;
   color: #fff;
@@ -166,7 +165,6 @@ input[type=range]::-webkit-slider-thumb{
   background: #ffffff;
   cursor: pointer;
 }
-
 .vertical-sentence{
   writing-mode: vertical-rl;
   -ms-writing-mode: tb-rl;
