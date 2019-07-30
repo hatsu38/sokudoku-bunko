@@ -1,5 +1,5 @@
 - content_for :css_each_page, stylesheet_link_tag('books')
-h1.title.has-text-centered.is-4 = @book.title
+h1.title.has-text-centered.is-4.push-top = @book.title
 -if @book.rakuten_book_info.try(:medium_image_url)
   figure.is-128x128.has-text-centered
     =image_tag @book.rakuten_book_info.try(:medium_image_url)

@@ -1,6 +1,6 @@
 <template>
   <div class="columns is-mobile is-multiline">
-    <div v-for="(book, idx) in books" class="column is-6-mobile is-3-tablet is-2-desktop">
+    <div v-for='book in books' :key='book.id' class='column is-6-mobile is-3-tablet is-2-desktop'>
       <div class="card">
         <div class="card-image light-border-bottom">
           <figure class="image" v-if="book.rakuten_book_info">
@@ -34,7 +34,7 @@ export default {
   components: {
     InfiniteLoading
   },
-  data: function () {
+  data() {
     return {
       books: [],
       page: 1
@@ -59,7 +59,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .infinite-loading-container{
   width: 100%;
   margin: 1rem auto 2rem;
