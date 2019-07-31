@@ -6,7 +6,7 @@
       <button @click="stop" class="button" :class="{'is-link': !reading}"><i class="fas fa-stop"></i>Stop</button>
       <button @click="reset" class="button"><i class="fas fa-backward"></i>Reset</button>
     </div>
-    <p class="subtitle is-marginless">
+    <p class="subtitle is-marginless has-text-centered">
       Speed：{{speed}}ms/word
     </p>
     <input v-model="speed" class="slider has-background-info is-fullwidth is-info" step="5" min="10" max="500" type="range">
@@ -17,7 +17,7 @@
     <div id="sentence-text" class="vertical-sentence">
       <h2 class="title is-5 has-text-weight-bold">{{title}}</h2>
       <p>
-        <span v-for="(word, idx) in words" :class="{'currentText': idx == currentNum }">{{word.text}}</span>
+        <span v-for='(word, idx) in words' :key='word.id' :class="{'currentText': idx == currentNum }">{{word.text}}</span>
       </p>
       <p @click="moreSentence" id="sentence-more-read">もっと読み込む</p>
     </div>
@@ -33,7 +33,7 @@ window.$ = window.jQuery = require('jquery')
 
 export default {
   router: Router,
-  data: function () {
+  data() {
     return {
       words: [],
       title: '',
@@ -47,14 +47,14 @@ export default {
       initialCurrentTextPosition: 0
     }
   },
-  created: function () {
+  created() {
     this.fetchWords();
   },
-  updated: function(){
+  updated() {
     this.initialCurrentTextPosition = document.getElementById('sentence-text').scrollLeft
   },
   watch: {
-    currentNum: function(){
+    currentNum() {
       if(this.currentNum % 10 == 0){
         this.getCurrentTextPosition()
       }
@@ -62,14 +62,14 @@ export default {
         this.moreSentence()
       }
     },
-    currentTextPosition: function(){
+    currentTextPosition() {
       if(this.currentTextPosition < 200 ){
         this.slideScroll()
       }
     }
   },
   methods: {
-    fetchWords: function () {
+    fetchWords() {
       axios.get(`/api/books/${this.$route.params.title}?page=${this.page}`).then((response) => {
         this.title = response.data.title
         this.words = response.data.words
@@ -79,7 +79,7 @@ export default {
         console.log(error);
       });
     },
-    moreSentence: function(){
+    moreSentence() {
       axios.get(`/api/books/${this.$route.params.title}?page=${this.page}`).then((response) => {
         this.words.push(...response.data.words)
         this.page++
@@ -87,53 +87,51 @@ export default {
         console.log(error);
       });
     },
-    count: function() {
+    count() {
       if(this.currentNum >= this.words.length - 1){
         return this.stop()
       }
       this.currentNum++
       this.currentWord = this.words[this.currentNum].text
     },
-    start: function() {
+    start() {
       this.currentWord = this.words[this.currentNum].text
       this.reading = true
       this.count()
       this.timerObj = setTimeout(this.start, this.speed);
     },
-    stop: function(){
+    stop() {
       clearTimeout(this.timerObj)
       this.reading = false
     },
-    reset: function(){
+    reset() {
       this.currentWord = this.words[0].text
       this.currentNum = 0;
       $('#sentence-text').animate({scrollLeft: this.initialCurrentTextPosition+500}, 1000, 'swing');
     },
-    slideScroll: function(){
+    slideScroll() {
       var targetX = document.getElementById('sentence-text').scrollLeft -= 50;
       $('#sentence-text').animate({scrollLeft: targetX}, 500, 'swing');
     },
-    getCurrentTextPosition: function(){
+    getCurrentTextPosition() {
       this.currentTextPosition = document.getElementsByClassName('currentText')[0].getBoundingClientRect().left;
     }
   }
 }
 </script>
 
-<style>
-#words{
-  text-align: center;
-}
+<style scoped lang="scss">
 .buttons{
   justify-content: center;
-}
-.button > i, .button > svg{
-  margin-right: 5px;
+  > .button{
+    > i, svg{
+      margin-right: 5px;
+    }
+  }
 }
 .title{
   margin-top: 20px;
 }
-
 .currentText{
   background: #209cee;
   color: #fff;
@@ -166,7 +164,6 @@ input[type=range]::-webkit-slider-thumb{
   background: #ffffff;
   cursor: pointer;
 }
-
 .vertical-sentence{
   writing-mode: vertical-rl;
   -ms-writing-mode: tb-rl;
@@ -177,21 +174,21 @@ input[type=range]::-webkit-slider-thumb{
   overflow-x: auto;
   line-height: 2.2rem;
   text-align: justify;
-}
-.vertical-sentence h2{
+  > h2{
   margin-top: 0;
   margin-left: 15px;
 }
+}
 .mask-relative{
   position: relative;
-}
-.mask{
-  position: absolute;
-  left: 0;
-  opacity: .8;
-  width: 28%;
-  height: 500px;
-  z-index: 5;
+  > .mask{
+    position: absolute;
+    left: 0;
+    opacity: .8;
+    width: 28%;
+    height: 500px;
+    z-index: 5;
+  }
 }
 #sentence-more-read{
   z-index: 9;

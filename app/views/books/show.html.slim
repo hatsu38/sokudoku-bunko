@@ -1,8 +1,11 @@
 - content_for :css_each_page, stylesheet_link_tag('books')
-h1.title.has-text-centered.is-4 = @book.title
+h1.title.has-text-centered.is-4.push-top = @book.title
 -if @book.rakuten_book_info.try(:medium_image_url)
   figure.is-128x128.has-text-centered
     =image_tag @book.rakuten_book_info.try(:medium_image_url)
+- else
+  figure.is-128x128.has-text-centered
+    = image_tag '/no_image.png', class: 'detail-no-image-size'
 .book-infos
   p
     | 作者：
@@ -22,6 +25,7 @@ h1.title.has-text-centered.is-4 = @book.title
 #words
   sokudoku
 = javascript_pack_tag 'read'
+= stylesheet_pack_tag 'read'
 
 - if @book.author.books
   section.section.recomend_books
@@ -44,7 +48,8 @@ section.section.push-top
 
 #books
   books
-= javascript_pack_tag "books"
+= javascript_pack_tag 'books'
+= stylesheet_pack_tag 'books'
 
 javascript:
   var moreReadButton = document.getElementById("more-read-button");

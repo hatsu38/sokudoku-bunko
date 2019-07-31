@@ -16,7 +16,7 @@ export default {
     }
   },
   components: {
-    'booksLists': booksLists
+    booksLists
   },
   created() {
     this.createPath()
@@ -25,18 +25,18 @@ export default {
     createPath() {
       const url = location.pathname
       if( url == '/') {
-        this.path = '/api/books/?'
+        this.path = '/api/books?'
       } else if ( url.startsWith('/authors')) {
         this.path = `/api/${url}?`
       } else {
-        this.path = '/api/books/?'
+        this.path = '/api/books?'
       }
     }
   }
 }
 </script>
 
-<style>
+<style scoped lang="scss">
 .section-title{
   margin-top: 20px;
 }

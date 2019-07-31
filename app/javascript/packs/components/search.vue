@@ -30,7 +30,7 @@ export default {
     }
   },
   components: {
-    'searchedBooks': searchedBooks
+    searchedBooks
   }
 }
 </script>

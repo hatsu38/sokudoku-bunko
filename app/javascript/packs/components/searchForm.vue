@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  data: function () {
+  data() {
     return{
       keyword: this.$parent.keyword
     }

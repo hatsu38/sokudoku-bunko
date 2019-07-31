@@ -32,7 +32,7 @@ class Api::BooksController < ApplicationController
   end
 
   def ranking
-    @books = Book.where(id: Ranking.page(params[:page]).per(PER).select(:book_id).order(rank: :asc)).includes(:author, :rakuten_book_info)
+    @books = Book.where(id: Ranking.select(:book_id).order(rank: :asc)).includes(:author, :rakuten_book_info).page(params[:page]).per(PER)
   end
 
   def download_txt(zip_url, txt_path)
