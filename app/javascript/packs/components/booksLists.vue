@@ -59,7 +59,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .infinite-loading-container{
   width: 100%;
   margin: 1rem auto 2rem;
@@ -67,7 +67,6 @@ export default {
 .card-image > .image > img{
   height: 231px;
 }
-
 .book-title{
   padding: 5px 4px;
   height: 54px;

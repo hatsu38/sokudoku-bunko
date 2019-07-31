@@ -120,12 +120,14 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .buttons{
   justify-content: center;
-}
-.button > i, .button > svg{
-  margin-right: 5px;
+  > .button{
+    > i, svg{
+      margin-right: 5px;
+    }
+  }
 }
 .title{
   margin-top: 20px;
@@ -172,21 +174,21 @@ input[type=range]::-webkit-slider-thumb{
   overflow-x: auto;
   line-height: 2.2rem;
   text-align: justify;
-}
-.vertical-sentence h2{
+  > h2{
   margin-top: 0;
   margin-left: 15px;
 }
+}
 .mask-relative{
   position: relative;
-}
-.mask{
-  position: absolute;
-  left: 0;
-  opacity: .8;
-  width: 28%;
-  height: 500px;
-  z-index: 5;
+  > .mask{
+    position: absolute;
+    left: 0;
+    opacity: .8;
+    width: 28%;
+    height: 500px;
+    z-index: 5;
+  }
 }
 #sentence-more-read{
   z-index: 9;

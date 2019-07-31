@@ -60,7 +60,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .card-image > .image > img{
   height: 231px;
 }
