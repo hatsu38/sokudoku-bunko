@@ -1,0 +1,68 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_self
+ */
+@import "../node_modules/bulma/bulma.sass";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+body{
+  background: #fff;
+}
+.light-border-bottom{
+  border-bottom: 1px solid #dedede;
+}
+.small_margin{
+  margin: .5rem;
+}
+.push-top{
+  margin-top: 10px;
+}
+.push-bottom{
+  margin-bottom: 10px;
+}
+.push-side{
+  margin-right: 10px;
+  margin-left: 10px;
+}
+.is-none{
+  display: none;
+}
+.header-line-hight{
+  line-height: 52px;
+}
+.navbar_left{
+  width: 88%;
+}
+.navbar_right{
+  font-size: 1.25rem;
+  width: 12%;
+}
+@media screen and (min-width: 1024px){
+  .container{
+    max-width: inherit;
+  }
+}
+
+
+.footer{
+  padding: 2rem 1.5rem 3rem;
+  a{
+    color: #666;
+    font-size: 13px;
+    padding: 5px;
+  }
+  .copy{
+    color: #666;
+  }
+}

@@ -1,0 +1,14 @@
+table.table.is-fullwidth.is-hoverable.is-bordered
+  thead
+    tr
+      th 著者名
+      th 誕生日
+      th 本の数
+      th 編集
+  tbody
+    - authors.each_with_index do |author, i|
+      tr
+        td = link_to author.name, admin_author_path(author)
+        td = author.birthday
+        td = author.books.count
+        td = link_to '編集', edit_admin_author_path(author)

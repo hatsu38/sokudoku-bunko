@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    title SokudokuBunko
+    = csrf_meta_tags
+    = csp_meta_tag
+    meta name="viewport" content="width=device-width, initial-scale=1"
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
+    = yield :css_each_page
+  body
+    = render 'admin/header'
+    - flash.each do |message_type, message|
+      div class="notification is-#{message_type}"
+        = message
+    = yield
