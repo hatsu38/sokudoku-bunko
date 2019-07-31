@@ -2,7 +2,7 @@
   <div>
     <nav class="is-fixed-top light-border-bottom is-flex">
       <div class="control has-icons-left has-icons-right is-flex is-fluid container field">
-        <form class="small_margin navbar_left">
+        <form class="small_margin navbar_left" onsubmit="return false;">
           <input v-model="keyword" type="text" id="bookTitleField" class="input is-success" placeholder="著書名" />
         </form>
         <span class="icon is-small is-left small_margin">

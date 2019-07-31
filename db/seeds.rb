@@ -58,7 +58,7 @@ CSV.foreach('db/list_person_all_extended_utf8.csv', headers: true).with_index do
           Dir.mkdir(base_dir + entry.name.delete('.txt'))
           zip.extract(entry, base_dir + save_path) { true }
         end
-
+        sleep 0.3
         if book.rakuten_book_info.nil?
           item = RakutenWebService::Ichiba::Item.search(keyword: book.title) ? RakutenWebService::Ichiba::Item.search(keyword: book.title + " 文庫 " + book.author.name).first : nil
           small_image_url = item['smallImageUrls'] ? item['smallImageUrls'][0] : nil
@@ -83,3 +83,12 @@ end
 
 system('bash bin/script/all_encode.sh')
 system('bundle exec rails txt_fix:all_txt_fix')
+system('bundle exec rails ranking:add_ranking[30] ')
+
+if User.find_by(admin: true).nil?
+  User.create(
+    email: Rails.application.credentials.admin_info[:email],
+    password: Rails.application.credentials.admin_info[:password],
+    admin: true
+  )
+end

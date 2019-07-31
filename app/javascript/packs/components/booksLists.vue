@@ -14,6 +14,10 @@
           <div class="book-title">
             {{ book.title }}
           </div>
+          <div class="has-text-grey-light book-imporession-author">
+            <p v-if="book.impressions_count > 0"><i class="far fa-eye"></i> {{ book.impressions_count }}</p>
+            <p>{{ book.author.name }}</p>
+          </div>
         </a>
       </div>
     </div>
@@ -66,10 +70,6 @@ export default {
 }
 .card-image > .image > img{
   height: 231px;
-}
-.book-title{
-  padding: 5px 4px;
-  height: 54px;
 }
 .message-body{
   padding: 10px;
