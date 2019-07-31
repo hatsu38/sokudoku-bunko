@@ -10,3 +10,9 @@
       = link_to book_path(book.title), class: 'content book-info' do
         .book-title
           = book.title
+        .has-text-grey-light.book-imporession-author
+          - if book.impressions_count > 0
+            p
+              i.far.fa-eye
+              = book.impressions_count
+          p #{book.author.name}

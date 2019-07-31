@@ -5,12 +5,6 @@
     }
   }
 }
-
-.book-title{
-  padding: 5px 4px;
-  height: 54px;
-}
-
 .section{
   padding: 0 0 1.5rem;
   background: #dbdbdb;
@@ -36,7 +30,20 @@
 .book-infos{
   margin: .5rem 1rem 0;
 }
-
+.book-info{
+  display: block;
+  padding: 5px 4px;
+  .book-imporession-author{
+    p{
+      margin: 0 .2rem;
+      font-size: 12.5px;
+      display: inline-block;
+      i, svg{
+        margin-right: .1rem;
+      }
+    }
+  }
+}
 .rakuten-purchace{
   background-color: #668ad8;
   box-shadow: 0 5px 0 0 #627295;

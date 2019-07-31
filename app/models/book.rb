@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Book < ApplicationRecord
+  is_impressionable counter_cache: true
+
   validates :title, presence: true
   validates :txt_file, presence: true
   validates :bookid, presence: true, uniqueness: true
@@ -12,7 +14,7 @@ class Book < ApplicationRecord
   accepts_nested_attributes_for :rakuten_book_info
 
   scope :recent, ->(count) { order(id: :desc).limit(count) }
-  scope :efficiency_list, -> { select('id', 'title', 'author_id').includes(:author, :rakuten_book_info) }
+  scope :efficiency_list, -> { select('id', 'title', 'author_id', 'impressions_count').includes(:author, :rakuten_book_info) }
 
   def self.search(search)
     if search
