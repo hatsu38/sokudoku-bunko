@@ -8,7 +8,7 @@ class BooksController < ApplicationController
   end
 
   def show
-    @book = Book.find_by(title: params[:title])
+    @book = Book.find_by!(title: params[:title])
     @rankings = Book.where(id: Ranking.order(rank: :asc).select(:book_id)).limit(10).includes(:author, :rakuten_book_info)
     impressionist(@book, nil, unique: [:session_hash])
   end

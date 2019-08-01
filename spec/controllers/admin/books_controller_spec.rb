@@ -57,7 +57,7 @@ describe Admin::BooksController, type: :controller do
             expect(response.status).to eq(302)
             expect(response).to redirect_to(admin_book_path(book))
             expect(assigns(:book).id).to eq(book.id)
-            updated = Book.find_by(id: book.id)
+            updated = Book.find_by!(id: book.id)
             expect(updated.title).to eq('テスト完了')
             expect(flash[:success]).to be_present
             expect(flash[:danger]).to eq nil

@@ -50,7 +50,7 @@ describe Admin::AuthorsController, type: :controller do
             expect(response.status).to eq(302)
             expect(response).to redirect_to(admin_author_path(author))
             expect(assigns(:author).id).to eq(author.id)
-            updated = Author.find_by(id: author.id)
+            updated = Author.find_by!(id: author.id)
             expect(updated.name).to eq('新著者')
             expect(flash[:success]).to be_present
             expect(flash[:danger]).to eq nil

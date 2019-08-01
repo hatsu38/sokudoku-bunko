@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-
   root to: 'books#index'
   resources :books, only: %i[index show], param: :title
   get :search, to: 'books#search'
@@ -24,4 +23,6 @@ Rails.application.routes.draw do
     get :search, to: 'books#search'
     resources :authors, only: %i[index show edit update]
   end
+
+  get '*path', to: 'application#error_404'
 end

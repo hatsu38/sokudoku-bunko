@@ -7,15 +7,15 @@ class Admin::BooksController < AdminController
   end
 
   def show
-    @book = Book.find_by(id: params[:id])
+    @book = Book.find_by!(id: params[:id])
   end
 
   def edit
-    @book = Book.find_by(id: params[:id])
+    @book = Book.find_by!(id: params[:id])
   end
 
   def update
-    @book = Book.find_by(id: params[:id])
+    @book = Book.find_by!(id: params[:id])
     if @book.update(book_params)
       flash[:success] = '更新しました'
       redirect_to admin_book_path(@book)
