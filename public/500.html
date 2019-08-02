@@ -3,16 +3,82 @@
 <head>
   <title>We're sorry, but something went wrong (500) | そくどく文庫</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css" />
+  <style>
+    body{
+      background: #fff;
+    }
+    .light-border-bottom{
+      border-bottom: 1px solid #dedede;
+    }
+    .small_margin{
+      margin: .5rem;
+    }
+    .push-top{
+      margin-top: 10px;
+    }
+    .push-bottom{
+      margin-bottom: 10px;
+    }
+    .push-side{
+      margin-right: 10px;
+      margin-left: 10px;
+    }
+    .is-none{
+      display: none;
+    }
+    .header-line-hight{
+      line-height: 52px;
+    }
+    .navbar_left{
+      width: 88%;
+    }
+    .navbar_right{
+      font-size: 1.25rem;
+      width: 12%;
+    }
+    .footer {
+      padding: 2rem 1.5rem 3rem;
+    }
+    .footer a {
+      color: #666;
+      font-size: 13px;
+      padding: 5px;
+    }
+    .footer .copy {
+      color: #666;
+    }
+  </style>
 </head>
-
-<body class="rails-default-error-page">
+<body>
+  <nav class="is-fixed-top light-border-bottom is-flex">
+    <div class="navbar-brand navbar_left">
+      <h2 class="subtitle is-size-4 push-side has-text-weight-bold header-line-hight">
+        <a href="/" class="has-text-dark">そくどく文庫</a>
+      </h2>
+    </div>
+  </nav>
   <section class="hero is-light is-fullheight-with-navbar">
     <div class="hero-body">
       <div class="container">
         <h1 class="title is-size-4">アクセスしようとしたページは表示出来ませんでした🙇‍</h1>
         <h3 class="subtitle"> 500 Internal Server Error</h3>
+        <div class="link-blocks">
+            <p class="is-inline-block">
+              <a href="/">トップに戻る</a>
+            </p>
+          </div>
       </div>
     </div>
   </section>
+  <footer class="main-bg-color footer">
+    <div class="has-text-centered">
+      <div class="links">
+        <a href="https://twitter.com/hatsu_38">運営者</a>
+        <a href="https://twitter.com/hatsu_38">お問い合わせ</a>
+        <p class="copy">&copy; 2019 hatsu</p>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
