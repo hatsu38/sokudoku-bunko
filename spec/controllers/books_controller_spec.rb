@@ -22,6 +22,14 @@ describe BooksController, type: :controller do
       expect(response.status).to eq(200)
       expect(response).to render_template :show
     end
+
+    context 'error_404' do
+      it 'work' do
+        get :show, params: { title: "#{books.first.title}_hoge" }
+        expect(response.status).to eq(404)
+        expect(response).to render_template('errors/404')
+      end
+    end
   end
 
   describe 'get #search' do

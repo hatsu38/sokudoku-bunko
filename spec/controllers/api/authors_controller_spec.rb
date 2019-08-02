@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe Api::AuthorsController, type: :controller do
-  let!(:authors) { create_list(:author, 3) }
+  let(:authors) { create_list(:author, 3) }
 
   describe 'GET index' do
     it 'works' do
@@ -18,6 +18,13 @@ describe Api::AuthorsController, type: :controller do
       get :show, params: { name: authors.first.name }, format: :json
       expect(assigns(:author)).to eq(authors.first)
       expect(response.status).to eq(200)
+    end
+    context 'record_not_found' do
+      it 'work' do
+        get :show, params: { name: 'hoge' }, format: :json
+        expect(assigns(:author)).to eq(nil)
+        expect(response.status).to eq(200)
+      end
     end
   end
 end
