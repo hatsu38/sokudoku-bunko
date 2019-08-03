@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     message += exception ? "#{exception.class}: #{exception.message}\n#{exception.backtrace.join("\n")}" : ''
     logger.error(message)
     send_error_mail(exception, message)
-    render template: 'errors/500', status: :internal_server_error
+    render 'errors/500', status: :internal_server_error
   end
 
   def error_404(exception = nil)
@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
     message += exception ? "#{exception.class}: #{exception.message}\n#{exception.backtrace.join("\n")}" : ''
     logger.error(message)
     send_error_mail(exception, message) if exception.present?
-    render template: 'errors/404', status: :not_found, formats: :html
+    render 'errors/404', status: :not_found, formats: :html
   end
 
   def error_403(exception = nil)
@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
     message += exception ? "#{exception.class}: #{exception.message}\n#{exception.backtrace.join("\n")}" : ''
     logger.error(message)
     send_error_mail(exception, message) if exception.present?
-    render template: 'errors/403', status: :forbidden, formats: :html
+    render 'errors/403', status: :forbidden, formats: :html
   end
 
   private

@@ -1,16 +1,33 @@
 <template>
   <div>
     <h3 class="subtitle has-text-centered">そくどく！٩( 'ω' )و</h3>
-    <div class="buttons">
+    <div class="buttons is-marginless">
       <button @click="start" class="button" :class="{'is-link': reading}"><i class="fas fa-play"></i>Start</button>
       <button @click="stop" class="button" :class="{'is-link': !reading}"><i class="fas fa-stop"></i>Stop</button>
       <button @click="reset" class="button"><i class="fas fa-backward"></i>Reset</button>
     </div>
+    <p @click="open" id="zoom_btn" class="has-text-link has-text-centered push-bottom">そくどくモードで見る</p>
     <p class="subtitle is-marginless has-text-centered">
       Speed：{{speed}}ms/word
     </p>
     <input v-model="speed" class="slider has-background-info is-fullwidth is-info" step="5" min="10" max="500" type="range">
     <div class="current_slide">{{currentWord}}</div>
+    <div id="sokudoku-modal" class="modal">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <div class="buttons">
+            <button @click="start" class="button is-white" :class="{'is-outlined': !reading}"><i class="fas fa-play"></i>Start</button>
+            <button @click="stop" class="button is-white" :class="{'is-outlined': reading}"><i class="fas fa-stop"></i>Stop</button>
+            <button @click="reset" class="button is-outlined is-white reset-button"><i class="fas fa-backward"></i>Reset</button>
+          </div>
+          <p class="subtitle is-marginless has-text-centered has-text-white">
+            Speed：{{speed}}ms/word
+          </p>
+          <input v-model="speed" class="slider has-background-white" step="5" min="10" max="500" type="range">
+          <div class="current_slide">{{currentWord}}</div>
+      </div>
+      <button @click="close" class="modal-close is-large" aria-label="close"></button>
+    </div>
     <div class="mask-relative">
       <div class="mask has-background-white"></div>
     </div>
@@ -105,13 +122,22 @@ export default {
       this.reading = false
     },
     reset() {
-      this.currentWord = this.words[0].text
-      this.currentNum = 0;
-      $('#sentence-text').animate({scrollLeft: this.initialCurrentTextPosition+500}, 1000, 'swing');
+      var result = window.confirm("最初に戻りますか？");
+      if( result ){
+        this.currentWord = this.words[0].text
+        this.currentNum = 0;
+        $('#sentence-text').animate({scrollLeft: this.initialCurrentTextPosition+500}, 1000, 'swing');
+      }
     },
     slideScroll() {
       var targetX = document.getElementById('sentence-text').scrollLeft -= 50;
       $('#sentence-text').animate({scrollLeft: targetX}, 500, 'swing');
+    },
+    open(){
+      $("#sokudoku-modal").addClass('is-active');
+    },
+    close(){
+      $("#sokudoku-modal").removeClass('is-active');
     },
     getCurrentTextPosition() {
       this.currentTextPosition = document.getElementsByClassName('currentText')[0].getBoundingClientRect().left;
@@ -152,6 +178,7 @@ input[type=range] {
   -webkit-appearance:none;
   height: 13px;
   width: 100%;
+  border-radius: 5px;
   cursor: pointer;
 }
 input[type=range]::-webkit-slider-thumb{
@@ -194,5 +221,24 @@ input[type=range]::-webkit-slider-thumb{
   z-index: 9;
   position: relative;
   color: #777777;
+}
+.modal-background{
+  background-color: #333;
+}
+.modal-content{
+  margin-bottom: 70px;
+  input[type=range]{
+    width: 80%;
+    display: block;
+    margin: 10px auto 0;
+  }
+  .current_slide{
+    font-size: 30px;
+  }
+  .reset-button:hover{
+    background-color: #333;
+    border-color: white;
+    color: white;
+  }
 }
 </style>
