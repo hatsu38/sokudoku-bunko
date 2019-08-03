@@ -1,0 +1,7 @@
+[エラー内容]
+<%= raw @message %>
+--------------------
+<%= raw @exception.try(:message) %>
+
+---スタックトレース---
+<%= raw @exception.backtrace.join("\n") %>
