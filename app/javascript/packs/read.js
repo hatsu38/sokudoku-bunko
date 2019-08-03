@@ -4,6 +4,6 @@ import sokudoku from './components/sokudoku.vue'
 var app = new Vue({
   el: '#words',
   components: {
-    'sokudoku': sokudoku,
+    sokudoku
   }
 });
