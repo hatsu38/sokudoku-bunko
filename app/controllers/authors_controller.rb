@@ -6,7 +6,7 @@ class AuthorsController < ApplicationController
   end
 
   def show
-    @author = Author.find_by(name: params[:name])
+    @author = Author.find_by!(name: params[:name])
     @rankings = Book.where(id: Ranking.order(rank: :asc).select(:book_id)).limit(10).includes(:author, :rakuten_book_info)
   end
 end

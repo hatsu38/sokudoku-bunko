@@ -19,6 +19,13 @@ describe Api::BooksController, type: :controller do
       expect(assigns(:book)).to eq(books.first)
       expect(response.status).to eq(200)
     end
+    context 'recode_not_found' do
+      it 'work' do
+        get :show, params: { title: 'hoge' }, format: :json
+        expect(assigns(:book)).to eq(nil)
+        expect(response.status).to eq(200)
+      end
+    end
   end
 
   describe 'get #search' do
@@ -27,6 +34,13 @@ describe Api::BooksController, type: :controller do
       get :search, params: { title: '生門' }, format: :json
       expect(assigns(:books).first.title).to eq(book.title)
       expect(response.status).to eq(200)
+    end
+    context 'recode_not_found' do
+      it 'work' do
+        get :search, params: { title: 'hoge' }, format: :json
+        expect(assigns(:book)).to eq(nil)
+        expect(response.status).to eq(200)
+      end
     end
   end
 
