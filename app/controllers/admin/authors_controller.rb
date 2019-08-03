@@ -7,15 +7,15 @@ class Admin::AuthorsController < AdminController
   end
 
   def show
-    @author = Author.find_by(id: params[:id])
+    @author = Author.find_by!(id: params[:id])
   end
 
   def edit
-    @author = Author.find_by(id: params[:id])
+    @author = Author.find_by!(id: params[:id])
   end
 
   def update
-    @author = Author.find_by(id: params[:id])
+    @author = Author.find_by!(id: params[:id])
     if @author.update(author_params)
       flash[:success] = '更新しました'
       redirect_to admin_author_path(@author)

@@ -13,6 +13,8 @@ class Api::BooksController < ApplicationController
 
   def show
     @book = Book.find_by(title: params[:title])
+    return @words = nil if @book.nil?
+
     txt_path = "db/txt/#{@book.txt_file}"
     download_txt(@book.zip_url, txt_path) unless File.exist?(txt_path)
     File.open(txt_path, 'r') do |f|
