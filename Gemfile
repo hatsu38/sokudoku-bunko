@@ -15,6 +15,7 @@ gem 'mechanize'
 gem 'natto'
 gem 'rakuten_web_service'
 gem 'rubyzip'
+gem 'serviceworker-rails'
 gem 'slim-rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
