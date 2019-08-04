@@ -7,8 +7,8 @@ html
         |  | そくどく文庫
       meta property="og:title" content="#{yield :html_title}"
     - else
-      title そくどく文庫
-      meta property="og:title" content="そくどく文庫"
+      title 楽して速く本が読める | そくどく文庫
+      meta property="og:title" content="楽して速く本が読める | そくどく文庫"
     - if content_for? :meta_description
       meta name="description" content="#{yield :meta_description}"
       meta property="og:description" content="#{yield :meta_description}"
@@ -24,7 +24,7 @@ html
       meta property="og:image" content="#{yield :ogp_image}"
     - else
       meta property="og:image" content="#{root_url}images/ogp.png"
-    meta property="og:site_name" content="そくどく文庫"
+    meta property="og:site_name" content="楽して速く本が読める | そくどく文庫"
     / Twitter 共通設定
     meta name="twitter:card" content="summary_large_image"
     meta name="twitter:site" content="@hatsu_38"
@@ -32,7 +32,7 @@ html
     meta property="fb:app_id" content="455097465041946"
     = csrf_meta_tags
     = csp_meta_tag
-    meta name="viewport" content="width=device-width, initial-scale=1"
+    meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     meta name="msapplication-square70x70logo" content="/images/favicons/site-tile-70x70.png"
