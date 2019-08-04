@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  if Rails.env.production?
+  unless Rails.env.development?
     rescue_from StandardError, with: :error_500
     rescue_from ActiveRecord::RecordNotFound, with: :error_404
     rescue_from ActionController::UnknownFormat, with: :error_404
