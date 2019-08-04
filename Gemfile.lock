@@ -338,6 +338,8 @@ GEM
     selenium-webdriver (3.142.3)
       childprocess (>= 0.5, < 2.0)
       rubyzip (~> 1.2, >= 1.2.2)
+    serviceworker-rails (0.6.0)
+      railties (>= 3.1)
     sexp_processor (4.12.1)
     slim (4.0.1)
       temple (>= 0.7.6, < 0.9)
@@ -440,6 +442,7 @@ DEPENDENCIES
   rubyzip
   sass-rails (~> 5.0)
   selenium-webdriver
+  serviceworker-rails
   slim-rails
   spring
   spring-watcher-listen (~> 2.0.0)
