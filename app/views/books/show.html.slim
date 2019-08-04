@@ -15,6 +15,7 @@ h1.title.has-text-centered.is-4.push-top = @book.title
     | 作者：
     = link_to "#{@book.author.name}", author_path(@book.author.name)
   p 初版出版日：#{@book.published}
+  = render 'commons/share_buttons'
   .caption
     p#caption = @book.rakuten_book_info.try(:caption)
 - if @book.rakuten_book_info
