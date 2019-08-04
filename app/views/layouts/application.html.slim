@@ -1,7 +1,16 @@
 doctype html
 html
   head
-    title そくどく文庫
+    title
+      - if content_for? :html_title
+        == yield :html_title
+        |  | そくどく文庫
+      - else
+        | そくどく文庫
+    - if content_for? :meta_description
+      meta name="description" content="#{yield :meta_description}"
+    - else
+      meta name="description" content="そくどく文庫は、本を読むのが遅い人でも楽に本を読む速度が早くなるサイトです📖ぜひ、気になる作品をそくどくしてみてください！"
     = csrf_meta_tags
     = csp_meta_tag
     meta name="viewport" content="width=device-width, initial-scale=1"
