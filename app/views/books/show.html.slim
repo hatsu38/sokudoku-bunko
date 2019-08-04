@@ -1,3 +1,7 @@
+- content_for :html_title, @book.title
+- content_for :meta_description, "#{@book.author.name}が書き、#{@book.published}に出版された「#{@book.title}」です。"
+- if @book.rakuten_book_info.try(:medium_image_url)
+  - content_for :ogp_image, @book.rakuten_book_info.try(:medium_image_url)
 - content_for :css_each_page, stylesheet_link_tag('books')
 h1.title.has-text-centered.is-4.push-top = @book.title
 -if @book.rakuten_book_info.try(:medium_image_url)
@@ -11,6 +15,7 @@ h1.title.has-text-centered.is-4.push-top = @book.title
     | 作者：
     = link_to "#{@book.author.name}", author_path(@book.author.name)
   p 初版出版日：#{@book.published}
+  = render 'commons/share_buttons'
   .caption
     p#caption = @book.rakuten_book_info.try(:caption)
 - if @book.rakuten_book_info

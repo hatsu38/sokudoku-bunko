@@ -1,6 +1,26 @@
 footer.main-bg-color.footer
   .has-text-centered
+    p.subtitle.is-marginless このサイトを共有する
+    .sns-share-links
+      = link_to "http://twitter.com/share?url=#{CGI.escape(root_url)}&text=そくどく文庫&hashtags=そくどく文庫", class: 'sns has-text-white is-inline-block push-side twitter', target: '_blank', rel: 'nofollow' do
+        i.fab.fa-twitter
+      = link_to "https://www.facebook.com/sharer/sharer.php?u=#{CGI.escape(root_url)}", class: 'sns has-text-white is-inline-block push-side facebook', target: '_blank', rel: 'nofollow' do
+        i.fab.fa-facebook-f
+      = link_to "http://line.me/R/msg/text/?#{CGI.escape(root_url)}", class: 'sns has-text-white is-inline-block push-side line', target: '_blank', rel: 'nofollow' do
+        i.fab.fa-line
+      = link_to "#", class: 'sns has-text-white is-inline-block push-side copy-link', rel: 'nofollow', onclick: "clipURL();return false;" do
+        i.far.fa-copy
+  .has-text-centered
     .links
-      = link_to '運営者', 'https://twitter.com/hatsu_38'
-      = link_to 'お問い合わせ', 'https://twitter.com/hatsu_38'
+      = link_to '運営者', 'https://twitter.com/hatsu_38', target: '_blank', rel: 'nofollow'
+      = link_to 'お問い合わせ', 'https://twitter.com/hatsu_38', target: '_blank', rel: 'nofollow'
     p.copy &copy; 2019 hatsu
+
+javascript:
+  function clipURL() {
+    $('body').append('<textarea id="rootURL" style="position:fixed;left:-100%;">'+location.protocol+'//'+location.host+'/</textarea>');
+    $('#rootURL').select();
+    document.execCommand('copy');
+    $('#rootURL').remove();
+    alert("URLをコピーしました。");
+  }

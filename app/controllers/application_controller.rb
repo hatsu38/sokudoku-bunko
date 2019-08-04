@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  rescue_from StandardError, with: :error_500
-  rescue_from ActiveRecord::RecordNotFound, with: :error_404
-  rescue_from ActionController::UnknownFormat, with: :error_404
-  rescue_from ActionView::MissingTemplate, with: :error_404
+  unless Rails.env.development?
+    rescue_from StandardError, with: :error_500
+    rescue_from ActiveRecord::RecordNotFound, with: :error_404
+    rescue_from ActionController::UnknownFormat, with: :error_404
+    rescue_from ActionView::MissingTemplate, with: :error_404
+  end
 
   def error_500(exception = nil)
     message = '[server error] internal server error occured'
