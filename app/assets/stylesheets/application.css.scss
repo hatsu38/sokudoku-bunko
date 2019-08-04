@@ -53,9 +53,44 @@ body{
     max-width: inherit;
   }
 }
+.facebook{
+  background-color: #3C5A99;
+  color: #fff;
+}
+.twitter{
+  background-color: #1DA1F2;
+  color: #fff;
+}
+.line{
+  background-color: #00B900;
+  color: #fff;
+}
+.copy-link{
+  background-color: #15202b;
+  color: #fff;
+}
+.share-buttons{
+  height: 22px;
+  margin-top: 5px;
+  > iframe{
+    margin-right: 3px;
+    margin-left: 3px;
+  }
+}
 .footer{
   padding: 2rem 1.5rem 3rem;
-  a{
+  .sns-share-links{
+    margin-top: 5px;
+    margin-bottom: 1.5rem;
+    > a.sns {
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      font-size: 22px;
+    }
+  }
+  .links > a{
     color: #666;
     font-size: 13px;
     padding: 5px;

@@ -7,7 +7,7 @@ set :repo_url, "git@github.com:toywonder/sokudoku-bunko.git"
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 # リリースするブランチ名を記述↓
-set :branch, 'release/0.0.8'
+set :branch, 'release/0.0.9'
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/var/www/sokudoku-bunko"

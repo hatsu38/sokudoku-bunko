@@ -1,3 +1,5 @@
+- content_for :html_title, '著者一覧'
+- content_for :css_each_page, stylesheet_link_tag('books')
 h1 著者一覧
 ul
   - @authors.each do |author|

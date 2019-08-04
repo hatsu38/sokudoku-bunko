@@ -9,11 +9,13 @@ gem 'amazon-ecs'
 gem 'devise'
 gem 'font-awesome-sass'
 gem 'impressionist'
+gem 'jquery-rails'
 gem 'kaminari'
 gem 'mechanize'
 gem 'natto'
 gem 'rakuten_web_service'
 gem 'rubyzip'
+gem 'serviceworker-rails'
 gem 'slim-rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -35,7 +37,7 @@ gem 'webpacker'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
+# gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
