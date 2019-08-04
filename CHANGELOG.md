@@ -1,6 +1,10 @@
 ### verion名
   - #PR番号 PR名
 
+### version 0.0.9
+  - #64 OGPとファビコン、SNSシェアボタンを設置
+  - #65 :sparkles:Serviceworker追加
+
 ### version 0.0.8
   - #60 :sparkles:そくどくモードを追加
 
