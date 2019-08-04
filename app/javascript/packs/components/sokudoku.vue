@@ -134,9 +134,11 @@ export default {
       $('#sentence-text').animate({scrollLeft: targetX}, 500, 'swing');
     },
     open(){
+      this.stop();
       $("#sokudoku-modal").addClass('is-active');
     },
     close(){
+      this.stop();
       $("#sokudoku-modal").removeClass('is-active');
     },
     getCurrentTextPosition() {
