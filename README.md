@@ -1,5 +1,7 @@
+![LOGO](./public/images/ogp.png)
 # README
 そくどく文庫は、本を読むのが遅い人でも楽に本を読む速度が早くなるサイトです📖
+![DEMO](https://raw.githubusercontent.com/wiki/toywonder/sokudoku-bunko/images/sokudoku-bunko.gif)
 
 - Ruby 2.6.3
 - Rails 5.2.3
