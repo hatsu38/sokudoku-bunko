@@ -10,8 +10,14 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require jquery_ujs
 //= require activestorage
 //= require_tree .
 //= require serviceworker-companion
+
+function clipURL() {
+  $('body').append('<textarea id="rootURL" style="position:fixed;left:-100%;">'+location.protocol+'//'+location.host+'/</textarea>');
+  $('#rootURL').select();
+  document.execCommand('copy');
+  $('#rootURL').remove();
+  alert("URLをコピーしました。");
+}

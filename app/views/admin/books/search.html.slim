@@ -1,4 +1,4 @@
-- content_for :css_each_page, stylesheet_link_tag('admin')
+- content_for :css_each_page, stylesheet_link_tag('admin'), media: 'screen'
 
 = render 'admin/authors/authors_lists', authors: @authors
 = render 'admin/books/books_lists', books: @books

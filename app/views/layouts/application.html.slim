@@ -1,5 +1,5 @@
 doctype html
-html
+html lang="ja"
   head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#"
     - if content_for? :html_title
       title
@@ -33,8 +33,6 @@ html
     = csrf_meta_tags
     = csp_meta_tag
     meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     meta name="msapplication-square70x70logo" content="/images/favicons/site-tile-70x70.png"
     meta name="msapplication-square150x150logo" content="/images/favicons/site-tile-150x150.png"
     meta name="msapplication-wide310x150logo" content="/images/favicons/site-tile-310x150.png"
@@ -79,9 +77,13 @@ html
     link rel="icon" type="image/png" sizes="24x24" href="/images/favicons/icon-24x24.png"
     link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/icon-32x32.png"
 
-    script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
-    script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"
-    script src="https://platform.twitter.com/widgets.js" charset="utf-8"
+    link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css" async="async"
+    script src="https://kit.fontawesome.com/d0384ad1a7.js" defer="defer"
+    = stylesheet_link_tag    'application', media: 'screen', 'data-turbolinks-track': 'reload'
+    script src="https://code.jquery.com/jquery-3.4.1.min.js" async="async"
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload', async: "async"
+    script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" defer="defer"
+    script src="https://platform.twitter.com/widgets.js" charset="utf-8"  defer="defer"
     = yield :css_each_page
   body
     - if search_path != request.path_info
