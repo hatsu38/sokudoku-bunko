@@ -12,12 +12,9 @@
  *
  *= require_self
  */
-@import "../node_modules/bulma/bulma.sass";
-@import "font-awesome-sprockets";
-@import "font-awesome";
 
 body{
-  background: #fff;
+  background: #fefefe;
 }
 .light-border-bottom{
   border-bottom: 1px solid #dedede;
@@ -38,6 +35,9 @@ body{
 .is-none{
   display: none;
 }
+.is-absolute{
+  position: absolute;
+}
 .header-line-hight{
   line-height: 52px;
 }
@@ -48,6 +48,15 @@ body{
   font-size: 1.25rem;
   width: 12%;
 }
+.hero-body{
+  padding: 2rem 1.5rem;
+}
+.container{
+  > .subtitle{
+    margin-bottom: .8rem;
+  }
+}
+
 @media screen and (min-width: 1024px){
   .container{
     max-width: inherit;

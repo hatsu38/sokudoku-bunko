@@ -7,22 +7,23 @@
         </div>
       </article>
       <div class="columns is-mobile is-multiline">
-        <div v-for='book in books' :key='book.id' class='column is-6-mobile is-3-tablet is-2-desktop'>
+        <div v-for='book in books' :key='book.id' class='column is-4-mobile is-3-tablet is-2-desktop'>
           <div class="card">
             <div class="card-image light-border-bottom">
-              <figure class="image" v-if="book.rakuten_book_info">
-                <img :src=book.rakuten_book_info.medium_image_url>
+              <figure class="image is-relative" v-if="book.rakuten_book_info">
+                <img :src=book.rakuten_book_info.medium_image_url :alt="book.title">
+                <p class="is-absolute impression" v-if="book.impressions_count > 0"><i class="far fa-eye"></i><span>{{ book.impressions_count }}</span></p>
               </figure>
-              <figure class="image" v-else>
-                <img src="no_image.png">
+              <figure class="image is-relative" v-else>
+                <img src="/no_image.png" alt="no-image">
+                <p class="is-absolute impression" v-if="book.impressions_count > 0"><i class="far fa-eye"></i><span>{{ book.impressions_count }}</span></p>
               </figure>
             </div>
             <a :href="'/books/'+book.title" class="content book-info">
               <div class="book-title">
                 {{ book.title }}
               </div>
-              <div class="has-text-grey-light book-imporession-author">
-                <p v-if="book.impressions_count > 0"><i class="far fa-eye"></i> {{ book.impressions_count }}</p>
+              <div class="has-text-grey-light book-author">
                 <p>{{ book.author.name }}</p>
               </div>
             </a>
@@ -63,13 +64,3 @@ export default {
   }
 }
 </script>
-
-<style scoped lang="scss">
-.card-image > .image > img{
-  height: 231px;
-}
-.message-body{
-  padding: 10px;
-  margin-top: -1rem;
-}
-</style>

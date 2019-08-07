@@ -1,4 +1,4 @@
-- content_for :css_each_page, stylesheet_link_tag('admin')
+- content_for :css_each_page, stylesheet_link_tag('admin'), media: 'screen'
 section.section
   .container
     = form_with model: @author, url: admin_author_path, local: true do |author|

@@ -2,6 +2,6 @@ nav.is-fixed-top.light-border-bottom.is-flex
   .navbar-brand.navbar_left
     h2.subtitle.is-size-4.push-side.has-text-weight-bold.header-line-hight
       = link_to 'そくどく文庫', root_path, class: 'has-text-dark'
-  = link_to search_path, class: 'is-inline-block has-text-centered navbar_right header-line-hight' do
+  = link_to search_path, class: 'is-inline-block has-text-centered navbar_right header-line-hight', 'aria-label': '検索' do
     #search-icon
       i.fas.fa-search

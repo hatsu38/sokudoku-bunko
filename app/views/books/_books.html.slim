@@ -1,18 +1,18 @@
 - books.each_with_index do |book, i|
-  .column.is-6-mobile.is-3-tablet.is-2-desktop
+  .column.is-4-mobile.is-3-tablet.is-2-desktop
     .card
       .card-image.light-border-bottom
-        figure.image
+        figure.image.is-relative
           - if book.rakuten_book_info.try(:medium_image_url)
-            = image_tag book.rakuten_book_info.medium_image_url
+            = image_tag book.rakuten_book_info.medium_image_url, alt: book.title
           - else
-            = image_tag '/no_image.png'
-      = link_to book_path(book.title), class: 'content book-info' do
+            = image_tag '/no_image.png', alt: 'no-image'
+          - if book.impressions_count > 0
+            p.is-absolute.impression
+              i.far.fa-eye
+              span #{book.impressions_count}
+      = link_to book_path(book.title), class: 'content book-info is-size-7' do
         .book-title
           = book.title
-        .has-text-grey-light.book-imporession-author
-          - if book.impressions_count > 0
-            p
-              i.far.fa-eye
-              = book.impressions_count
+        .has-text-grey-light.book-author
           p #{book.author.name}
