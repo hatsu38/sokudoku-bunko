@@ -43,10 +43,6 @@
 <script>
 import axios from 'axios';
 import Router from '../router'
-import jQuery from 'jquery'
-global.jquery = jQuery
-global.$ = jQuery
-window.$ = window.jQuery = require('jquery')
 
 export default {
   router: Router,
