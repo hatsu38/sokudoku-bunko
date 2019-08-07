@@ -6,7 +6,7 @@
         <span class="icon is-small is-left small_margin">
           <i class="fas fa-book" />
         </span>
-        <a href="/" id="close-form" class="is-inline-block has-text-centered navbar_right header-line-hight">
+        <a href="/" id="close-form" class="is-inline-block has-text-centered navbar_right header-line-hight" aria-label='トップページへ遷移する' >
           <i class="fas fa-times" />
         </a>
       </div>

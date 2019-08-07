@@ -43,10 +43,6 @@
 <script>
 import axios from 'axios';
 import Router from '../router'
-import jQuery from 'jquery'
-global.jquery = jQuery
-global.$ = jQuery
-window.$ = window.jQuery = require('jquery')
 
 export default {
   router: Router,
@@ -162,14 +158,14 @@ export default {
 }
 .currentText{
   background: #209cee;
-  color: #fff;
+  color: #fefefe;
   padding: 2px;
   border-radius: 5px;
 }
 .current_slide{
   font-size: 22px;
   background: #333;
-  color: #fff;
+  color: #fefefe;
   width: 100%;
   padding: 5px 0;
   display: flex;
@@ -190,7 +186,7 @@ input[type=range]::-webkit-slider-thumb{
   height: 20px;
   width: 16px;
   border-radius: 3px;
-  background: #ffffff;
+  background: #fefefe;
   cursor: pointer;
 }
 .vertical-sentence{

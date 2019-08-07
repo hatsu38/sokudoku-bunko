@@ -1,11 +1,15 @@
 - content_for :html_title, "検索"
-- content_for :css_each_page, stylesheet_link_tag('books')
+- content_for :css_each_page, stylesheet_link_tag('books'), media: 'screen'
 
 #searchPage
   search
-= javascript_pack_tag 'search'
-= stylesheet_pack_tag 'search'
+= javascript_pack_tag 'search', async: "async"
 
-sass:
-  .small_margin
+scss:
+  .small_margin{
     margin-right: 0
+  }
+  .message-body{
+    padding: 10px;
+    margin-top: -1rem;
+  }

@@ -1,19 +1,53 @@
+.columns{
+  > .column.is-4-mobile{
+    padding-right: 0.3rem;
+    padding-left: 0.3rem;
+  }
+  > .column.is-4-mobile:nth-child(3n-2){
+    padding-left: 0.8rem;
+  }
+  > .column.is-4-mobile:nth-child(3n){
+    padding-right: 0.8rem;
+  }
+}
 .card-image{
   .image{
     img{
-      height: 231px;
+      height: 151px;
     }
   }
+  .impression{
+    font-size: .6rem;
+    bottom: -6%;
+    right: 1.5px;
+    border: 1px solid #ccc;
+    background: #fefefe;
+    color: #666;
+    border-radius: 50%;
+    padding: 3px 2px;
+    i, svg{
+      margin-right: .1rem;
+    }
+    span{
+      font-size: .5rem;
+    }
+  }
+}
+.book-title{
+  font-size: .85rem;
 }
 .section{
   padding: 0 0 1.5rem;
   background: #dbdbdb;
   .container{
     padding: 0 .6rem;
-    background: #fff;
+    background: #fefefe;
     box-shadow: 0 7px 8px -8px rgba(0, 0, 0, 0.32);
     -webkit-box-shadow: 0 7px 8px -8px rgba(0, 0, 0, 0.32);
     -moz-box-shadow: 0 7px 8px -8px rgba(0, 0, 0, 0.32);
+    > .section-title{
+      margin-top: 20px;
+    }
   }
 }
 .to-ranking{
@@ -24,69 +58,18 @@
     margin-left: .3rem;
   }
 }
-.detail-no-image-size{
-  width: 140px;
-}
-.book-infos{
-  margin: .5rem 1rem 0;
-}
 .book-info{
   display: block;
   padding: 5px 4px;
-  .book-imporession-author{
-    p{
-      margin: 0 .2rem;
-      font-size: 12.5px;
-      display: inline-block;
-      i, svg{
-        margin-right: .1rem;
-      }
-    }
-  }
 }
-.rakuten-purchace{
-  background-color: #668ad8;
-  box-shadow: 0 5px 0 0 #627295;
-  border-radius: 4px;
-  max-width: 80%;
-  margin: .5em auto 1.2rem;
-  line-height: 1.4;
-  transition: all .2s ease;
-  &:hover{
-    box-shadow: none;
-    transform: translateY(5px);
-    opacity: 0.8;
-  }
-  .rakuten-link{
-    padding: 0.5em;
-    .fa-angle-right{
-      float: right;
-      font-size: 1.5rem;
-    }
-  }
-}
-
-.caption{
-  margin: 1rem auto 0;
-  overflow: hidden;
+.book-author{
   p{
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 5;
-    line-height: 1.7rem;
+    margin: 0 .1rem;
+    font-size: .5rem;
   }
 }
-#more-read-button{
-  margin-bottom: 10px;
+// 無限スクロール
+.infinite-loading-container{
+  width: 100%;
+  margin: 1rem auto 2rem;
 }
-#close-read-button{
-  display: none;
-}
-.recomend_books{
-  margin-top: 50px;
-  .container{
-    padding-bottom: 2.5rem;
-  }
-}
-
-// 著者ページ
