@@ -1,6 +1,9 @@
 ### verion名
   - #PR番号 PR名
 
+### version 0.0.11
+  - #73 :art:PC用のデザインに変更
+
 ### version 0.0.10
   - #69 :+1:CSS,JSの読み込みを修正してPSI改善
 
