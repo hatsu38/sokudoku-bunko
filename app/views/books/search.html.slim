@@ -1,7 +1,7 @@
 - content_for :html_title, "検索"
 - content_for :css_each_page, stylesheet_link_tag('books'), media: 'screen'
 
-#searchPage
+#searchPage.container
   search
 = javascript_pack_tag 'search', async: "async"
 

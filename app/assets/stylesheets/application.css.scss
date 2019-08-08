@@ -56,10 +56,19 @@ body{
     margin-bottom: .8rem;
   }
 }
-
-@media screen and (min-width: 1024px){
+@media screen and (min-width: 720px){
+  .hero-body{
+    >.has-text-center-pc{
+      text-align: center;
+      font-size: 1.4rem;
+      padding: inherit;
+    }
+  }
+}
+@media screen and (min-width: 860px){
   .container{
-    max-width: inherit;
+    max-width: 860px;
+    margin: 0 auto;
   }
 }
 .facebook{
