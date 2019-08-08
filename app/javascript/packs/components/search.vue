@@ -11,8 +11,8 @@
         </a>
       </div>
     </nav>
-    <div class="hero-body">
-      <p class="has-text-weight-bold">
+    <div class="hero-body container">
+      <p class="has-text-weight-bold has-text-center-pc">
         そくどく文庫は、本を読むのが遅い人でも楽に本を読む速度が早くなるサイトです📖
       </p>
     </div>

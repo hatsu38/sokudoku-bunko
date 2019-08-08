@@ -10,50 +10,51 @@ h1.title.has-text-centered.is-4.push-top = @book.title
 - else
   figure.is-128x128.has-text-centered
     = image_tag '/no_image.png', class: 'detail-no-image-size', alt: 'no-image'
-.book-infos
-  p
-    | 作者：
-    = link_to "#{@book.author.name}", author_path(@book.author.name)
-  p 初版出版日：#{@book.published}
-  = render 'commons/share_buttons'
-  .caption
-    p#caption = @book.rakuten_book_info.try(:caption)
-- if @book.rakuten_book_info
-  p#more-read-button.has-text-centered.has-text-link もっと見る
-  p#close-read-button.has-text-centered.has-text-link 閉じる
+.container
+  .book-infos
+    p
+      | 作者：
+      = link_to "#{@book.author.name}", author_path(@book.author.name)
+    p 初版出版日：#{@book.published}
+    = render 'commons/share_buttons'
+    .caption
+      p#caption = @book.rakuten_book_info.try(:caption)
+  - if @book.rakuten_book_info
+    p#more-read-button.has-text-centered.has-text-link もっと見る
+    p#close-read-button.has-text-centered.has-text-link 閉じる
 
-  .purchace-block
-    .rakuten-purchace.has-text-centered.is-paddingless
-      = link_to @book.rakuten_book_info.try(:affiliate_url), target: '_blank', class: 'rakuten-link is-marginless has-text-white is-block has-text-weight-bold', rel: 'nofollow noreferrer'
-        | #{@book.rakuten_book_info.try(:price)} 円で発売中
-        i.fas.fa-angle-right
-#words
-  sokudoku
-= javascript_pack_tag 'read', async: "async"
-= stylesheet_pack_tag 'read', async: "async", defer: "defer"
+    .purchace-block
+      .rakuten-purchace.has-text-centered.is-paddingless
+        = link_to @book.rakuten_book_info.try(:affiliate_url), target: '_blank', class: 'rakuten-link is-marginless has-text-white is-block has-text-weight-bold', rel: 'nofollow noreferrer'
+          | #{@book.rakuten_book_info.try(:price)} 円で発売中
+          i.fas.fa-angle-right
+  #words
+    sokudoku
+  = javascript_pack_tag 'read', async: "async"
+  = stylesheet_pack_tag 'read', async: "async", defer: "defer"
 
-- if @book.author.books
-  section.section.recomend_books
+  - if @book.author.books
+    section.section.recomend_books
+      .container
+        h2.subtitle.has-text-weight-bold.has-text-centered
+          = @book.author.name
+          | の本一覧
+        .columns.is-mobile.is-multiline
+          = render 'books/books', books: @book.author.books
+
+  section.section.push-top
     .container
-      h2.subtitle.has-text-weight-bold.has-text-centered
-        = @book.author.name
-        | の本一覧
+      h2.subtitle.has-text-weight-bold 人気小説
       .columns.is-mobile.is-multiline
-        = render 'books/books', books: @book.author.books
+        = render 'books/books', books: @rankings
+      p.has-text-weight-bold.has-text-centered.to-ranking
+        = link_to ranking_path do
+          | もっと見る
+          i.fas.fa-chevron-right
 
-section.section.push-top
-  .container
-    h2.subtitle.has-text-weight-bold 人気小説
-    .columns.is-mobile.is-multiline
-      = render 'books/books', books: @rankings
-    p.has-text-weight-bold.has-text-centered.to-ranking
-      = link_to ranking_path do
-        | もっと見る
-        i.fas.fa-chevron-right
-
-#books
-  books
-= javascript_pack_tag 'books', async: "async"
+  #books
+    books
+  = javascript_pack_tag 'books', async: "async"
 
 scss:
   .detail-no-image-size{
@@ -62,24 +63,26 @@ scss:
   .book-infos{
     margin: .5rem 1rem 0;
   }
-  .rakuten-purchace{
-    background-color: #668ad8;
-    box-shadow: 0 5px 0 0 #627295;
-    border-radius: 4px;
-    max-width: 80%;
-    margin: .5em auto 1.2rem;
-    line-height: 1.4;
-    transition: all .2s ease;
-    &:hover{
-      box-shadow: none;
-      transform: translateY(5px);
-      opacity: 0.8;
-    }
-    .rakuten-link{
-      padding: 0.5em;
-      .fa-angle-right{
-        float: right;
-        font-size: 1.5rem;
+  .purchace-block{
+    margin: 0 1rem;
+    > .rakuten-purchace{
+      background-color: #668ad8;
+      box-shadow: 0 5px 0 0 #627295;
+      border-radius: 4px;
+      margin: .5em auto 1.2rem;
+      line-height: 1.4;
+      transition: all .2s ease;
+      &:hover{
+        box-shadow: none;
+        transform: translateY(5px);
+        opacity: 0.8;
+      }
+      > .rakuten-link{
+        padding: 0.5em;
+        .fa-angle-right{
+          float: right;
+          font-size: 1.5rem;
+        }
       }
     }
   }
