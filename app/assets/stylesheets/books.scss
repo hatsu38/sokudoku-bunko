@@ -1,13 +1,15 @@
-.columns{
-  > .column.is-4-mobile{
-    padding-right: 0.3rem;
-    padding-left: 0.3rem;
-  }
-  > .column.is-4-mobile:nth-child(3n-2){
-    padding-left: 0.8rem;
-  }
-  > .column.is-4-mobile:nth-child(3n){
-    padding-right: 0.8rem;
+@media screen and (max-width: 768px){
+  .columns{
+    > .column.is-4-mobile{
+      padding-right: 0.3rem;
+      padding-left: 0.3rem;
+    }
+    > .column.is-4-mobile:nth-child(3n-2){
+      padding-left: 0.8rem;
+    }
+    > .column.is-4-mobile:nth-child(3n){
+      padding-right: 0.8rem;
+    }
   }
 }
 .card-image{
@@ -37,14 +39,8 @@
   font-size: .85rem;
 }
 .section{
-  padding: 0 0 1.5rem;
-  background: #dbdbdb;
-  .container{
-    padding: 0 .6rem;
-    background: #fefefe;
-    box-shadow: 0 7px 8px -8px rgba(0, 0, 0, 0.32);
-    -webkit-box-shadow: 0 7px 8px -8px rgba(0, 0, 0, 0.32);
-    -moz-box-shadow: 0 7px 8px -8px rgba(0, 0, 0, 0.32);
+  padding: 0 .8rem 1.5rem;
+  > .container{
     > .section-title{
       margin-top: 20px;
     }
@@ -53,6 +49,7 @@
 .to-ranking{
   padding-bottom: 1rem;
   border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
   padding-top: 1rem;
   i, svg{
     margin-left: .3rem;
