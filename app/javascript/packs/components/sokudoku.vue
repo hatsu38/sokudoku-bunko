@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h3 class="subtitle has-text-centered">そくどく！٩( 'ω' )و</h3>
+    <h3 class="is-size-5 has-text-centered has-text-weight-bold push-top push-bottom">そくどく！٩( 'ω' )و</h3>
+    <p v-show="moveToCurrentPosition" @click="movePosition" class="has-text-centered has-text-weight-bold has-text-danger push-bottom">現在地へスクロールする</p>
     <div class="buttons is-marginless">
       <button @click="start" class="button" :class="{'is-link': reading}"><i class="fas fa-play"></i>Start</button>
       <button @click="stop" class="button" :class="{'is-link': !reading}"><i class="fas fa-stop"></i>Stop</button>
@@ -33,15 +34,15 @@
     </div>
     <div id="sentence-text" class="vertical-sentence">
       <h2 class="title is-5 has-text-weight-bold">{{title}}</h2>
-      <p>
-        <span v-for='(word, idx) in words' :key='word.id' :class="{'currentText': idx == currentNum }">{{word.text}}</span>
+      <p id="sentence">
+        <span v-for='(word, idx) in words' :key="idx" :class="{'currentText': idx == currentNum }">{{word.text}}</span>
       </p>
       <p @click="moreSentence" id="sentence-more-read">もっと読み込む</p>
     </div>
   </div>
 </template>
 <script>
-import axios from 'axios';
+import axios from 'axios'
 import Router from '../router'
 
 export default {
@@ -56,49 +57,46 @@ export default {
       reading: false,
       timerObj: null,
       speed: 180,
-      currentTextPosition: 0,
-      initialCurrentTextPosition: 0
+      moveToCurrentPosition: false
     }
   },
   created() {
-    this.fetchWords();
-  },
-  updated() {
-    this.initialCurrentTextPosition = document.getElementById('sentence-text').scrollLeft
+    this.fetchWords()
   },
   watch: {
     currentNum() {
       if(this.currentNum % 10 == 0){
-        this.getCurrentTextPosition()
+        this.slideScroll()
       }
       if(this.currentNum >= this.words.length - 50){
         this.moreSentence()
-      }
-    },
-    currentTextPosition() {
-      if(this.currentTextPosition < 200 ){
-        this.slideScroll()
       }
     }
   },
   methods: {
     fetchWords() {
-      axios.get(`/api/books/${this.$route.params.title}?page=${this.page}`).then((response) => {
+      axios.get(`/api/books/${this.$route.params.title}?page=${this.page}`)
+      .then((response) => {
         this.title = response.data.title
         this.words = response.data.words
         this.currentWord = this.title
         this.page++
-      }, (error) => {
-        console.log(error);
-      });
+        // イケテないが、this.wordsを取得した後にRestart関数が動くのが望ましいためここに記述
+        this.restart()
+      })
+      .catch((error) => {
+        console.log(error)
+      })
     },
     moreSentence() {
-      axios.get(`/api/books/${this.$route.params.title}?page=${this.page}`).then((response) => {
+      axios.get(`/api/books/${this.$route.params.title}?page=${this.page}`)
+      .then((response) => {
         this.words.push(...response.data.words)
         this.page++
-      }, (error) => {
-        console.log(error);
-      });
+      })
+      .catch((error) => {
+        console.log(error)
+      })
     },
     count() {
       if(this.currentNum >= this.words.length - 1){
@@ -111,34 +109,74 @@ export default {
       this.currentWord = this.words[this.currentNum].text
       this.reading = true
       this.count()
-      this.timerObj = setTimeout(this.start, this.speed);
+      this.timerObj = setTimeout(this.start, this.speed)
     },
     stop() {
       clearTimeout(this.timerObj)
       this.reading = false
+      this.setStorage()
     },
     reset() {
-      var result = window.confirm("最初に戻りますか？");
-      if( result ){
-        this.currentWord = this.words[0].text
-        this.currentNum = 0;
-        $('#sentence-text').animate({scrollLeft: this.initialCurrentTextPosition+500}, 1000, 'swing');
-      }
+      const result = window.confirm("最初に戻りますか？")
+      if(!result){ return false }
+      this.currentWord = this.words[0].text
+      this.currentNum = 0
+      this.setStorage()
+      $('#sentence-text').animate({scrollLeft: document.getElementById('sentence').clientWidth}, 1000, 'swing')
     },
     slideScroll() {
-      var targetX = document.getElementById('sentence-text').scrollLeft -= 50;
-      $('#sentence-text').animate({scrollLeft: targetX}, 500, 'swing');
+      var targetX = document.getElementById('sentence-text').scrollLeft - (280 - document.getElementsByClassName('currentText')[0].getBoundingClientRect().left)
+      if(targetX < 0){ targetX = targetX * -1 }
+      $('#sentence-text').animate({scrollLeft: targetX}, 500, 'swing')
     },
     open(){
-      this.stop();
-      $("#sokudoku-modal").addClass('is-active');
+      this.stop()
+      $("#sokudoku-modal").addClass('is-active')
     },
     close(){
-      this.stop();
-      $("#sokudoku-modal").removeClass('is-active');
+      this.stop()
+      $("#sokudoku-modal").removeClass('is-active')
     },
-    getCurrentTextPosition() {
-      this.currentTextPosition = document.getElementsByClassName('currentText')[0].getBoundingClientRect().left;
+    setStorage() {
+      // 30単語目まではほぼ最初なのでStorageに保存しない
+      if(this.currentNum <= 30){
+        localStorage.removeItem(this.title)
+      } else {
+        // 文章を取得したらPageに+1がされるので、現在のページは-1をする
+        const datalist = {
+          page: this.page - 1,
+          restartPosition: this.currentNum
+        }
+        localStorage.setItem(this.title, JSON.stringify(datalist))
+      }
+    },
+    restart() {
+      const dataList = JSON.parse(localStorage.getItem(this.title))
+      if(!this.restartConfirm(dataList)){
+        localStorage.removeItem(this.title)
+        return false
+      }
+      if(dataList.restartPosition % 10 == 0){ dataList.restartPosition -= 1 }
+      this.currentNum = dataList.restartPosition
+      if(dataList.page > 1){
+        this.page = dataList.page
+        for(var i = 2; i <= this.page; i++) {
+          this.moreSentence()
+        }
+      }
+      this.moveToCurrentPosition = true
+    },
+    restartConfirm(dataList){
+      if(dataList){
+        return window.confirm("途中から再開しますか？")
+      }else{
+        return false
+      }
+    },
+    movePosition(){
+      this.currentWord = this.words[this.currentNum].text
+      this.slideScroll()
+      this.moveToCurrentPosition = false
     }
   }
 }

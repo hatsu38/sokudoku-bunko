@@ -1,6 +1,9 @@
 ### verion名
   - #PR番号 PR名
 
+### version 0.1.0
+  - #77 :tada:Restart機能追加
+
 ### version 0.0.11
   - #73 :art:PC用のデザインに変更
 
