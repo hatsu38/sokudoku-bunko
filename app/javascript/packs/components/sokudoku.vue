@@ -2,30 +2,42 @@
   <div>
     <h3 class="is-size-5 has-text-centered has-text-weight-bold push-top push-bottom">そくどく！٩( 'ω' )و</h3>
     <p v-show="moveToCurrentPosition" @click="movePosition" class="has-text-centered has-text-weight-bold has-text-danger push-bottom">現在地へスクロールする</p>
-    <div class="buttons is-marginless">
+    <p @click="open" id="zoom_btn" class="has-text-link has-text-centered push-bottom">そくどくモードで見る</p>
+    <div class="buttons">
       <button @click="start" class="button" :class="{'is-link': reading}"><i class="fas fa-play"></i>Start</button>
       <button @click="stop" class="button" :class="{'is-link': !reading}"><i class="fas fa-stop"></i>Stop</button>
       <button @click="reset" class="button"><i class="fas fa-backward"></i>Reset</button>
+      <div class="has-text-centered is-block">
+        <button @click="back" class="button is-size-6"><i class="fas fa-caret-left"></i></button>
+        <button @click="next" class="button is-size-6"><i class="fas fa-caret-right"></i></button>
+      </div>
     </div>
-    <p @click="open" id="zoom_btn" class="has-text-link has-text-centered push-bottom">そくどくモードで見る</p>
-    <p class="subtitle is-marginless has-text-centered">
+    <p class="is-size-5 has-text-centered">
       Speed：{{speed}}ms/word
     </p>
-    <input v-model="speed" class="slider has-background-info is-fullwidth is-info" step="5" min="10" max="500" type="range">
     <div class="current_slide">{{currentWord}}</div>
+    <div class="has-text-centered">
+      <input v-model="speed" class="slider has-background-info is-fullwidth is-info" step="5" min="10" max="500" type="range">
+    </div>
     <div id="sokudoku-modal" class="modal">
       <div class="modal-background"></div>
       <div class="modal-content">
+        <div class="current_slide">{{currentWord}}</div>
         <div class="buttons">
-            <button @click="start" class="button is-white" :class="{'is-outlined': !reading}"><i class="fas fa-play"></i>Start</button>
-            <button @click="stop" class="button is-white" :class="{'is-outlined': reading}"><i class="fas fa-stop"></i>Stop</button>
-            <button @click="reset" class="button is-outlined is-white reset-button"><i class="fas fa-backward"></i>Reset</button>
+          <button @click="start" class="button is-white" :class="{'is-outlined': !reading}"><i class="fas fa-play"></i>Start</button>
+          <button @click="stop" class="button is-white" :class="{'is-outlined': reading}"><i class="fas fa-stop"></i>Stop</button>
+          <button @click="reset" class="button is-outlined is-white reset-button"><i class="fas fa-backward"></i>Reset</button>
+          <div class="has-text-centered is-block">
+            <button @click="back" class="button is-outlined push-side is-white back-button"><i class="fas fa-caret-left"></i></button>
+            <button @click="next" class="button is-outlined push-side is-white next-button"><i class="fas fa-caret-right"></i></button>
           </div>
-          <p class="subtitle is-marginless has-text-centered has-text-white">
-            Speed：{{speed}}ms/word
-          </p>
+        </div>
+        <p class="is-size-5 has-text-centered has-text-white">
+          Speed：{{speed}}ms/word
+        </p>
+        <div class="has-text-centered">
           <input v-model="speed" class="slider has-background-white" step="5" min="10" max="500" type="range">
-          <div class="current_slide">{{currentWord}}</div>
+        </div>
       </div>
       <button @click="close" class="modal-close is-large" aria-label="close"></button>
     </div>
@@ -124,6 +136,17 @@ export default {
       this.setStorage()
       $('#sentence-text').animate({scrollLeft: document.getElementById('sentence').clientWidth}, 1000, 'swing')
     },
+    back(){
+      if(this.currentNum == 0 ){ return false }
+      this.stop()
+      this.currentNum--
+      this.currentWord = this.words[this.currentNum].text
+    },
+    next(){
+      this.stop()
+      this.currentNum++
+      this.currentWord = this.words[this.currentNum].text
+    },
     slideScroll() {
       var targetX = document.getElementById('sentence-text').scrollLeft - (280 - document.getElementsByClassName('currentText')[0].getBoundingClientRect().left)
       if(targetX < 0){ targetX = targetX * -1 }
@@ -185,7 +208,10 @@ export default {
 <style scoped lang="scss">
 .buttons{
   justify-content: center;
+  margin: 10px auto 0;
+  width: 93%;
   > .button{
+    // width: 30%;
     > i, svg{
       margin-right: 5px;
     }
@@ -213,7 +239,7 @@ export default {
 input[type=range] {
   -webkit-appearance:none;
   height: 13px;
-  width: 100%;
+  width: 90%;
   border-radius: 5px;
   cursor: pointer;
 }
@@ -263,11 +289,6 @@ input[type=range]::-webkit-slider-thumb{
 }
 .modal-content{
   margin-bottom: 70px;
-  input[type=range]{
-    width: 80%;
-    display: block;
-    margin: 10px auto 0;
-  }
   .current_slide{
     font-size: 30px;
   }
