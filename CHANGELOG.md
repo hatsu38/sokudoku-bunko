@@ -1,6 +1,9 @@
 ### verion名
   - #PR番号 PR名
 
+### version 0.1.1
+  - #81 :sparkles:Back,Nextボタン実装
+
 ### version 0.1.0
   - #77 :tada:Restart機能追加
 
