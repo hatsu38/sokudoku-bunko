@@ -10,7 +10,6 @@ WORK_TXT_ZIP_URL = 'テキストファイルURL'
 base_dir = 'db/txt/'
 RANKING_URL = "https://www.aozora.gr.jp/access_ranking/2019_04_xhtml.html"
 
-
 def get_top_rank_books(rank)
   agent = Mechanize.new
   page = agent.get(RANKING_URL)
@@ -34,11 +33,11 @@ def get_card_num(book_link_tag)
   card_num[0].to_i
 end
 
-
-top_rank_books = get_top_rank_books(30)
+# top_rank_books = get_top_rank_books(100)
 
 CSV.foreach('db/list_person_all_extended_utf8.csv', headers: true).with_index do |row, i|
-  next unless top_rank_books.include?(row['作品ID'].to_i)
+  break if i > 1000
+  # next unless top_rank_books.include?(row['作品ID'].to_i)
   puts i
   URI.parse(row[WORK_TXT_ZIP_URL]).open do |file|
     Zip::File.open_buffer(file.read) do |zip|
@@ -50,17 +49,27 @@ CSV.foreach('db/list_person_all_extended_utf8.csv', headers: true).with_index do
         if author.nil?
           author = Author.create!(name: row['姓'] + row['名'], birthday: row['生年月日'], authorid: row['人物ID'])
         end
-        book = Book.find_by(bookid: row['作品ID'])
+        book = author.books.find_by(title: row[WORK_TITLE])
         if book.nil?
           published_str = row['底本初版発行年1'].gsub!(/（(.*?)）/,'')
           published = Date.strptime(published_str,'%Y年%m月%d日')
           book = author.books.create!(title: row[WORK_TITLE], published: published, txt_file: save_path, zip_url: row[WORK_TXT_ZIP_URL], bookid: row['作品ID'])
-          Dir.mkdir(base_dir + entry.name.delete('.txt'))
-          zip.extract(entry, base_dir + save_path) { true }
+          # Dir.mkdir(base_dir + entry.name.delete('.txt'))
+          # zip.extract(entry, base_dir + save_path) { true }
         end
         sleep 0.3
         if book.rakuten_book_info.nil?
-          item = RakutenWebService::Ichiba::Item.search(keyword: book.title) ? RakutenWebService::Ichiba::Item.search(keyword: book.title + " 文庫 " + book.author.name).first : nil
+          item = if RakutenWebService::Ichiba::Item.search(keyword: book.title + " 文庫 " + book.author.name)
+            RakutenWebService::Ichiba::Item.search(keyword: book.title + " 文庫 " + book.author.name).first
+          elsif RakutenWebService::Ichiba::Item.search(keyword: book.title + " 小説 " + book.author.name)
+            RakutenWebService::Ichiba::Item.search(keyword: book.title + " 小説 " + book.author.name).first
+          elsif RakutenWebService::Ichiba::Item.search(keyword: book.title + " " + book.author.name)
+            RakutenWebService::Ichiba::Item.search(keyword: book.title + " " + book.author.name).first
+          elsif RakutenWebService::Ichiba::Item.search(keyword: book.title)
+            RakutenWebService::Ichiba::Item.search(keyword: book.title).first
+          else
+            nil
+          end
           small_image_url = item['smallImageUrls'] ? item['smallImageUrls'][0] : nil
           medium_image_url = item['mediumImageUrls'] ? item['mediumImageUrls'][0] : nil
           if item
@@ -83,7 +92,7 @@ end
 
 system('bash bin/script/all_encode.sh')
 system('bundle exec rails txt_fix:all_txt_fix')
-system('bundle exec rails ranking:add_ranking[30] ')
+system('bundle exec rails ranking:add_ranking[100]')
 
 if User.find_by(admin: true).nil?
   User.create(
