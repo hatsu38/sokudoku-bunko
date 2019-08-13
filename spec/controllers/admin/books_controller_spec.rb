@@ -102,8 +102,8 @@ describe Admin::BooksController, type: :controller do
         expect(response.status).to eq(200)
         expect(assigns(:books).first.title).to eq('Result')
         expect(assigns(:authors).first.name).to eq('Result')
-        expect(assigns(:books).count).to eq(1)
-        expect(assigns(:authors).count).to eq(1)
+        expect(assigns(:books).length).to eq(1)
+        expect(assigns(:authors).length).to eq(1)
         expect(response).to render_template :search
       end
     end
