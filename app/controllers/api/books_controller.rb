@@ -8,7 +8,7 @@ class Api::BooksController < ApplicationController
 
   PER = 20
   def index
-    @books = Book.efficiency_list.page(params[:page]).per(PER).order(id: :desc)
+    @books = Book.efficiency_list.page(params[:page]).per(PER)
   end
 
   def show

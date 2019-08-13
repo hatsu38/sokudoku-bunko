@@ -48,9 +48,11 @@ RSpec.describe Book, type: :model do
 
     describe 'efficiency_list' do
       it 'work' do
-        expect(Book.efficiency_list.pluck(:id)).to eq(Book.all.pluck(:id))
-        expect(Book.efficiency_list.pluck(:title)).to eq(Book.all.pluck(:title))
-        expect(Book.efficiency_list.pluck(:author_id)).to eq(Book.all.pluck(:author_id))
+        expect(Book.efficiency_list.pluck(:id)).to eq(Book.all.includes(:rakuten_book_info).order('rakuten_book_infos.medium_image_url desc').pluck(:id))
+        expect(Book.efficiency_list.pluck(:title)).to eq(Book.all.includes(:rakuten_book_info).order('rakuten_book_infos.medium_image_url desc').pluck(:title))
+        expect(
+          Book.efficiency_list.pluck(:author_id)
+        ).to eq(Book.all.includes(:rakuten_book_info).order('rakuten_book_infos.medium_image_url desc').pluck(:author_id))
       end
     end
   end
@@ -61,14 +63,14 @@ RSpec.describe Book, type: :model do
       let!(:book) { create(:book, title: '羅生門') }
       context 'exist params' do
         it 'work' do
-          expect(Book.search('生').count).to eq(1)
+          expect(Book.search('生').length).to eq(1)
           expect(Book.search('生').first.title).to eq(book.title)
         end
       end
 
       context 'not exist params' do
         it 'work' do
-          expect(Book.search('').count).to eq(Book.all.count)
+          expect(Book.search('').length).to eq(Book.all.length)
           expect(Book.search('').first.id).to eq(Book.last.id)
         end
       end
