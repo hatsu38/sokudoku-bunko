@@ -1,6 +1,9 @@
 ### verion名
   - #PR番号 PR名
 
+### version 0.1.3
+  - #87 ログローテートの追加とseedで1000件データ投入
+
 ### version 0.1.2
   - #84 :+1:GaとGtagを設置
 
