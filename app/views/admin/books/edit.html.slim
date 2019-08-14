@@ -14,6 +14,10 @@ section.section
         = book.label :published, '公開日', class: 'label'
         .control
           = book.date_field :published, class: 'input'
+      .field
+        = book.label :is_published, '公開状態', class: 'label checkbox'
+        .control
+          = book.check_box :is_published
       = book.fields_for :rakuten_book_info do |rakuten_book_info|
         .field
           = rakuten_book_info.label :price, '値段', class: 'label'

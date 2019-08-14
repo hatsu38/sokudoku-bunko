@@ -8,7 +8,7 @@ class Api::BooksController < ApplicationController
 
   PER = 20
   def index
-    @books = Book.efficiency_list.page(params[:page]).per(PER)
+    @books = Book.viewable.efficiency_list.page(params[:page]).per(PER)
   end
 
   def show
@@ -30,11 +30,11 @@ class Api::BooksController < ApplicationController
   end
 
   def search
-    @books = Book.search(params[:title]).page(params[:page]).per(PER).order(id: :desc)
+    @books = Book.viewable.search(params[:title]).page(params[:page]).per(PER).order(id: :desc)
   end
 
   def ranking
-    @books = Book.where(id: Ranking.select(:book_id).order(rank: :asc)).includes(:author, :rakuten_book_info).page(params[:page]).per(PER)
+    @books = Book.viewable.where(id: Ranking.select(:book_id).order(rank: :asc)).includes(:author, :rakuten_book_info).page(params[:page]).per(PER)
   end
 
   def download_txt(zip_url, txt_path)

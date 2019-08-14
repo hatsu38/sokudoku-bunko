@@ -16,7 +16,7 @@ class Author < ApplicationRecord
   end
 
   def take_books(num)
-    books.includes(:rakuten_book_info).select(:id, :title, :impressions_count)
+    books.viewable.includes(:rakuten_book_info).select(:id, :title, :impressions_count)
       .order(impressions_count: :desc).order('rakuten_book_infos.medium_image_url desc').take(num)
   end
 end
