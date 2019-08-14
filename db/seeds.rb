@@ -3,20 +3,10 @@
 require 'zip'
 require 'csv'
 require 'open-uri'
-require 'mechanize'
 
 WORK_TITLE = '作品名'
 WORK_TXT_ZIP_URL = 'テキストファイルURL'
 base_dir = 'db/txt/'
-
-def get_card_num(book_link_tag)
-  book_link = book_link_tag.get_attribute(:href)
-  card_num_html = book_link.match(/card\d+\.html/)
-  return nil if card_num_html.nil?
-  card_num = card_num_html[0].match(/\d+/)
-  return nil if card_num.nil?
-  card_num[0].to_i
-end
 
 CSV.foreach('db/list_person_all_extended_utf8.csv', headers: true).with_index do |row, i|
   break if i > 1000
@@ -40,29 +30,28 @@ CSV.foreach('db/list_person_all_extended_utf8.csv', headers: true).with_index do
           # zip.extract(entry, base_dir + save_path) { true }
         end
         sleep 0.3
-        if book.rakuten_book_info.nil?
-          item = if RakutenWebService::Ichiba::Item.search(keyword: book.title + " 文庫 " + book.author.name)
-            RakutenWebService::Ichiba::Item.search(keyword: book.title + " 文庫 " + book.author.name).first
-          elsif RakutenWebService::Ichiba::Item.search(keyword: book.title + " 小説 " + book.author.name)
-            RakutenWebService::Ichiba::Item.search(keyword: book.title + " 小説 " + book.author.name).first
-          elsif RakutenWebService::Ichiba::Item.search(keyword: book.title + " " + book.author.name)
-            RakutenWebService::Ichiba::Item.search(keyword: book.title + " " + book.author.name).first
-          elsif RakutenWebService::Ichiba::Item.search(keyword: book.title)
-            RakutenWebService::Ichiba::Item.search(keyword: book.title).first
-          else
-            nil
-          end
-          small_image_url = item['smallImageUrls'] ? item['smallImageUrls'][0] : nil
-          medium_image_url = item['mediumImageUrls'] ? item['mediumImageUrls'][0] : nil
-          if item
-            book.create_rakuten_book_info(
-              price: item['itemPrice'],
-              affiliate_url: item['affiliateUrl'],
-              small_image_url: small_image_url,
-              medium_image_url: medium_image_url,
-              caption: item['itemCaption']
-            )
-          end
+        next unless book.rakuten_book_info.nil?
+        item = if RakutenWebService::Ichiba::Item.search(keyword: book.title + " 文庫 " + book.author.name).first.present?
+                RakutenWebService::Ichiba::Item.search(keyword: book.title + " 文庫 " + book.author.name).first
+              elsif RakutenWebService::Ichiba::Item.search(keyword: book.title + " 小説 " + book.author.name).first.present?
+                RakutenWebService::Ichiba::Item.search(keyword: book.title + " 小説 " + book.author.name).first
+              elsif RakutenWebService::Ichiba::Item.search(keyword: book.title + " " + book.author.name).first.present?
+                RakutenWebService::Ichiba::Item.search(keyword: book.title + " " + book.author.name).first
+              elsif RakutenWebService::Ichiba::Item.search(keyword: book.title).first.present?
+                RakutenWebService::Ichiba::Item.search(keyword: book.title).first
+              else
+                nil
+              end
+        small_image_url = item['smallImageUrls'] ? item['smallImageUrls'][0] : nil
+        medium_image_url = item['mediumImageUrls'] ? item['mediumImageUrls'][0] : nil
+        if item
+          book.create_rakuten_book_info(
+            price: item['itemPrice'],
+            affiliate_url: item['affiliateUrl'],
+            small_image_url: small_image_url,
+            medium_image_url: medium_image_url,
+            caption: item['itemCaption']
+          )
         end
       end
     end

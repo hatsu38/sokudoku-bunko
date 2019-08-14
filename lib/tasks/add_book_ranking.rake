@@ -68,13 +68,13 @@ namespace :ranking do
             sleep 0.3
             next unless book.rakuten_book_info.nil?
 
-            book_item = if RakutenWebService::Ichiba::Item.search(keyword: book.title + ' 文庫 ' + book.author.name)
+            book_item = if RakutenWebService::Ichiba::Item.search(keyword: book.title + ' 文庫 ' + book.author.name).first.present?
                           RakutenWebService::Ichiba::Item.search(keyword: book.title + ' 文庫 ' + book.author.name).first
-                        elsif RakutenWebService::Ichiba::Item.search(keyword: book.title + ' 小説 ' + book.author.name)
+                        elsif RakutenWebService::Ichiba::Item.search(keyword: book.title + ' 小説 ' + book.author.name).first.present?
                           RakutenWebService::Ichiba::Item.search(keyword: book.title + ' 小説 ' + book.author.name).first
-                        elsif RakutenWebService::Ichiba::Item.search(keyword: book.title + ' ' + book.author.name)
+                        elsif RakutenWebService::Ichiba::Item.search(keyword: book.title + ' ' + book.author.name).first.present?
                           RakutenWebService::Ichiba::Item.search(keyword: book.title + ' ' + book.author.name).first
-                        elsif RakutenWebService::Ichiba::Item.search(keyword: book.title)
+                        elsif RakutenWebService::Ichiba::Item.search(keyword: book.title).first.present?
                           RakutenWebService::Ichiba::Item.search(keyword: book.title).first
                         else
                           nil

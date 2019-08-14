@@ -60,6 +60,17 @@ namespace :deploy do
     end
   end
 
+  desc 'reset migrate'
+  task :reset_migrate do
+    on roles(:app) do
+      with rails_env: fetch(:rails_env) do
+        within current_path do
+          execute :bundle, :exec, :rake, 'db:migrate:reset'
+        end
+      end
+    end
+  end
+
   desc 'add_ranking'
   task :add_ranking do
     on roles(:app) do
