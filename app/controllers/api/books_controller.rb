@@ -34,7 +34,7 @@ class Api::BooksController < ApplicationController
   end
 
   def ranking
-    @books = Book.viewable.where(id: Ranking.select(:book_id).order(rank: :asc)).includes(:author, :rakuten_book_info).page(params[:page]).per(PER)
+    @books = Book.viewable.joins(:ranking).includes(:author, :rakuten_book_info, :ranking).order('rank').page(params[:page]).per(PER)
   end
 
   def download_txt(zip_url, txt_path)
