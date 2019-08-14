@@ -2,7 +2,7 @@
 
 class AdminController < ActionController::Base
   layout 'admin'
-  before_action :authenticate_user!, :require_admin
+  before_action :authenticate_user!, :require_admin unless Rails.env.development?
 
   private
 

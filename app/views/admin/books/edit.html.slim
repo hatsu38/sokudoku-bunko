@@ -23,6 +23,9 @@ section.section
           = rakuten_book_info.label :price, '値段', class: 'label'
           = rakuten_book_info.text_field :price, class: 'input'
         .field
+          = rakuten_book_info.label :caption, 'キャプション', class: 'label'
+          = rakuten_book_info.text_area :caption, class: 'textarea'
+        .field
           = rakuten_book_info.label :affiliate_url, 'アフィリエイトURL', class: 'label'
           = rakuten_book_info.text_field :affiliate_url, class: 'input'
         .field
@@ -36,3 +39,34 @@ section.section
           - if rakuten_book_info.object.try(:medium_image_url)
             = image_tag rakuten_book_info.object.try(:medium_image_url)
       = book.submit '修正', data: { confirm: 'データを更新してよろしいですか？'}, class: 'button is-primary'
+
+- if @book.rakuten_book_info.nil?
+  .has-text-centered
+    = link_to 'RakutenにAPIリクエストを投げる', edit_admin_book_path(@book, name: :api_request), name: 'api_request', class: 'button is-success', method: :post
+  - if @item
+    .container
+      = form_with model: @book.rakuten_book_info, url: admin_rakuten_create_path(@book), local: true do |rakuten_book_info|
+        .field
+          = rakuten_book_info.label :price, '値段', class: 'label'
+          = rakuten_book_info.text_field :price, class: 'input', value: @item['itemPrice']
+        .field
+          = rakuten_book_info.label :affiliate_url, 'アフィリエイトURL', class: 'label'
+          = rakuten_book_info.text_field :affiliate_url, class: 'input', value: @item['affiliateUrl']
+        .field
+          = rakuten_book_info.label :caption, 'キャプション', class: 'label'
+          = rakuten_book_info.text_area :caption, class: 'textarea', value: @item['itemCaption']
+        .field
+          = rakuten_book_info.label :small_image_url, '小さい画像のURL', class: 'label'
+          - if @item['smallImageUrls']
+            = rakuten_book_info.text_field :small_image_url, class: 'input', value: @item['smallImageUrls'][0]
+            = image_tag @item['smallImageUrls'][0]
+          - else
+            = rakuten_book_info.text_field :small_image_url, class: 'input'
+        .field
+          = rakuten_book_info.label :medium_image_url, '中くらいの画像のURL', class: 'label'
+          - if @item['mediumImageUrls']
+            = rakuten_book_info.text_field :medium_image_url, class: 'input', value: @item['mediumImageUrls'][0]
+            = image_tag @item['mediumImageUrls'][0]
+          - else
+            = rakuten_book_info.text_field :medium_image_url, class: 'input'
+        = rakuten_book_info.submit 'RakutenInfoを作成する', class: 'button is-success'
