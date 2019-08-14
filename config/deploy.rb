@@ -7,7 +7,7 @@ set :repo_url, "git@github.com:toywonder/sokudoku-bunko.git"
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 # リリースするブランチ名を記述↓
-set :branch, 'release/0.1.3'
+set :branch, 'release/0.1.4'
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/var/www/sokudoku-bunko"
@@ -65,7 +65,18 @@ namespace :deploy do
     on roles(:app) do
       with rails_env: fetch(:rails_env) do
         within current_path do
-          execute :bundle, :exec, :rake, 'ranking:add_ranking[30]'
+          execute :bundle, :exec, :rake, 'ranking:add_ranking[500]'
+        end
+      end
+    end
+  end
+
+  desc 'regist_ranking'
+  task :regist_ranking do
+    on roles(:app) do
+      with rails_env: fetch(:rails_env) do
+        within current_path do
+          execute :bundle, :exec, :rake, 'ranking:regist_book_ranking'
         end
       end
     end

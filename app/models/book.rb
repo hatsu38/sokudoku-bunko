@@ -14,6 +14,7 @@ class Book < ApplicationRecord
   accepts_nested_attributes_for :rakuten_book_info
 
   scope :recent, ->(count) { order(id: :desc).limit(count) }
+  scope :viewable, -> { where(is_published: true) }
   scope :efficiency_list, -> do
     includes(:author, :rakuten_book_info).select('id', 'title', 'author_id', 'impressions_count').order('rakuten_book_infos.medium_image_url desc')
   end

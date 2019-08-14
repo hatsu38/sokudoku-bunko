@@ -8,21 +8,6 @@ require 'mechanize'
 WORK_TITLE = '作品名'
 WORK_TXT_ZIP_URL = 'テキストファイルURL'
 base_dir = 'db/txt/'
-RANKING_URL = "https://www.aozora.gr.jp/access_ranking/2019_04_xhtml.html"
-
-def get_top_rank_books(rank)
-  agent = Mechanize.new
-  page = agent.get(RANKING_URL)
-  trs = page.search('table.list tbody tr')
-  top_rank_books = []
-  trs.each_with_index do |tr, i|
-    book_link_tag = tr.at('.normal a')
-    next if book_link_tag.nil?
-    card_num = get_card_num(book_link_tag)
-    top_rank_books.push(card_num) if card_num
-    return top_rank_books if i > rank
-  end
-end
 
 def get_card_num(book_link_tag)
   book_link = book_link_tag.get_attribute(:href)
@@ -33,11 +18,8 @@ def get_card_num(book_link_tag)
   card_num[0].to_i
 end
 
-# top_rank_books = get_top_rank_books(100)
-
 CSV.foreach('db/list_person_all_extended_utf8.csv', headers: true).with_index do |row, i|
   break if i > 1000
-  # next unless top_rank_books.include?(row['作品ID'].to_i)
   puts i
   URI.parse(row[WORK_TXT_ZIP_URL]).open do |file|
     Zip::File.open_buffer(file.read) do |zip|
@@ -92,7 +74,7 @@ end
 
 system('bash bin/script/all_encode.sh')
 system('bundle exec rails txt_fix:all_txt_fix')
-system('bundle exec rails ranking:add_ranking[100]')
+system('bundle exec rails ranking:add_ranking[500]')
 
 if User.find_by(admin: true).nil?
   User.create(
