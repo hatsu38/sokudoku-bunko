@@ -114,7 +114,6 @@ def get_top_rank_books(rank)
     next if book_link_tag.nil?
     card_num = get_card_num(book_link_tag)
     top_rank_books.push(card_num.to_i) if card_num
-    puts card_num
     return top_rank_books if i == rank
   end
 end
