@@ -61,6 +61,6 @@ class Admin::BooksController < AdminController
 
   def book_params
     params.require(:book).permit(:title, :txt_file, :published, :is_published,
-                                 rakuten_book_info_attributes: %i[id price affiliate_url small_image_url medium_image_url])
+                                 rakuten_book_info_attributes: %i[id price caption affiliate_url small_image_url medium_image_url])
   end
 end
