@@ -35,9 +35,9 @@ capistranoでデプロイ
     bundle exec cap production deploy
     ```
 
-6. http://13.113.97.152 でデプロイが正常に出来ているか確認
+6. http://sokudoku-bunko.com でデプロイが正常に出来ているか確認
 
 ### 管理画面へのログイン
-- URL： http://13.113.97.152/admin
+- URL： http://sokudoku-bunko.com/admin
 - Email： 自分のメールアドレス
 - Password： パスワード

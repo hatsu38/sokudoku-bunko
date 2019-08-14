@@ -1,9 +1,9 @@
 import Vue from 'vue/dist/vue.esm'
-import books from './components/books.vue'
+import authors from './components/authors.vue'
 
 var app = new Vue({
-  el: '#books',
+  el: '#authors',
   components: {
-    books,
+    authors,
   }
 });

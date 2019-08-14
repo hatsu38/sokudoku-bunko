@@ -9,9 +9,14 @@ class Author < ApplicationRecord
 
   def self.search(search)
     if search
-      self.where('name like ?', "%#{search}%").recent(30)
+      where('name like ?', "%#{search}%").recent(30)
     else
-      self.recent(30)
+      recent(30)
     end
+  end
+
+  def take_books(num)
+    books.includes(:rakuten_book_info).select(:id, :title, :impressions_count)
+      .order(impressions_count: :desc).order('rakuten_book_infos.medium_image_url desc').take(num)
   end
 end
