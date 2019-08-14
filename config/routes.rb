@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     get :search, to: 'books#search'
     get '/', to: 'books#index'
     resources :books, only: %i[index show edit update]
+    post '/books/:id/rakuten_create', to: 'books#rakuten_create', as: 'rakuten_create'
     get :search, to: 'books#search'
     resources :authors, only: %i[index show edit update]
   end

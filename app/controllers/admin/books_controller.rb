@@ -12,6 +12,33 @@ class Admin::BooksController < AdminController
 
   def edit
     @book = Book.find_by!(id: params[:id])
+    return @book if params[:name] != 'api_request'
+
+    @item = if RakutenWebService::Ichiba::Item.search(keyword: @book.title + ' 文庫 ' + @book.author.name).first.present?
+              RakutenWebService::Ichiba::Item.search(keyword: @book.title + ' 文庫 ' + @book.author.name).first
+            elsif RakutenWebService::Ichiba::Item.search(keyword: @book.title + ' 小説 ' + @book.author.name).first.present?
+              RakutenWebService::Ichiba::Item.search(keyword: @book.title + ' 小説 ' + @book.author.name).first
+            elsif RakutenWebService::Ichiba::Item.search(keyword: @book.title + ' ' + @book.author.name).first.present?
+              RakutenWebService::Ichiba::Item.search(keyword: @book.title + ' ' + @book.author.name).first
+            elsif RakutenWebService::Ichiba::Item.search(keyword: @book.title).first.present?
+              RakutenWebService::Ichiba::Item.search(keyword: @book.title).first
+            else
+              nil
+            end
+  end
+
+  def rakuten_create
+    @book = Book.find_by!(id: params[:id])
+    if params
+      @book.create_rakuten_book_info(
+        price: params[:price],
+        affiliate_url: params[:affiliate_url],
+        small_image_url: params[:small_image_url],
+        medium_image_url: params[:medium_image_url],
+        caption: params[:caption]
+      )
+    end
+    redirect_to edit_admin_book_path(@book)
   end
 
   def update
