@@ -7,7 +7,7 @@ set :repo_url, "git@github.com:toywonder/sokudoku-bunko.git"
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 # リリースするブランチ名を記述↓
-set :branch, 'release/0.1.4'
+set :branch, 'release/0.1.5'
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/var/www/sokudoku-bunko"
@@ -65,7 +65,7 @@ namespace :deploy do
     on roles(:app) do
       with rails_env: fetch(:rails_env) do
         within current_path do
-          execute :bundle, :exec, :rake, 'db:migrate:reset'
+          execute :bundle, :exec, :rake, 'db:migrate:reset DISABLE_DATABASE_ENVIRONMENT_CHECK=1'
         end
       end
     end

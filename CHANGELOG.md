@@ -1,6 +1,9 @@
 ### verion名
   - #PR番号 PR名
 
+### version 0.1.5
+  - #95 :sparkles:RakutenBookInfoをリクエスト,作成するメソッド作成
+
 ### version 0.1.4
   - #90 管理画面の修正,ランキングを500位まで取得するタスク作成
 
