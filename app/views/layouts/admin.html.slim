@@ -1,13 +1,90 @@
 doctype html
 html
   head
-    title SokudokuBunko
+    - if content_for? :html_title
+      title
+        == yield :html_title
+        |  | そくどく文庫
+      meta property="og:title" content="#{yield :html_title}"
+    - else
+      title 楽して速く本が読める | そくどく文庫
+      meta property="og:title" content="楽して速く本が読める | そくどく文庫"
+    - if content_for? :meta_description
+      meta name="description" content="#{yield :meta_description}"
+      meta property="og:description" content="#{yield :meta_description}"
+    - else
+      meta name="description" content="そくどく文庫は、本を読むのが遅い人でも楽に本を読む速度が早くなるサイトです📖ぜひ、気になる作品をそくどくしてみてください！"
+      meta property="og:description" content="そくどく文庫は、本を読むのが遅い人でも楽に本を読む速度が早くなるサイトです📖ぜひ、気になる作品をそくどくしてみてください！"
+    meta property="og:url" content="#{request.url}"
+    - if request.path == root_path
+      meta property="og:type" content="website"
+    - else
+      meta property="og:type" content="article"
+    - if content_for? :ogp_image
+      meta property="og:image" content="#{yield :ogp_image}"
+    - else
+      meta property="og:image" content="#{root_url}images/ogp.png"
+    meta property="og:site_name" content="楽して速く本が読める | そくどく文庫"
+    / Twitter 共通設定
+    meta name="twitter:card" content="summary_large_image"
+    meta name="twitter:site" content="@hatsu_38"
+    / Facebook 用設定
+    meta property="fb:app_id" content="455097465041946"
     = csrf_meta_tags
     = csp_meta_tag
-    meta name="viewport" content="width=device-width, initial-scale=1"
+    meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"
+    meta name="msapplication-square70x70logo" content="/images/favicons/site-tile-70x70.png"
+    meta name="msapplication-square150x150logo" content="/images/favicons/site-tile-150x150.png"
+    meta name="msapplication-wide310x150logo" content="/images/favicons/site-tile-310x150.png"
+    meta name="msapplication-square310x310logo" content="/images/favicons/site-tile-310x310.png"
+    meta name="msapplication-TileColor" content="#0078d7"
+    link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/images/favicons/favicon.ico"
+    link rel="icon" type="image/vnd.microsoft.icon" href="/images/favicons/favicon.ico"
+    link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-touch-icon-57x57.png"
+    link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-touch-icon-60x60.png"
+    link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-touch-icon-72x72.png"
+    link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-touch-icon-76x76.png"
+    link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-touch-icon-114x114.png"
+    link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-touch-icon-120x120.png"
+    link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-touch-icon-144x144.png"
+    link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-touch-icon-152x152.png"
+    link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon-180x180.png"
+    link rel="icon" type="image/png" sizes="36x36" href="/images/favicons/android-chrome-36x36.png"
+    link rel="icon" type="image/png" sizes="48x48" href="/images/favicons/android-chrome-48x48.png"
+    link rel="icon" type="image/png" sizes="72x72" href="/images/favicons/android-chrome-72x72.png"
+    link rel="icon" type="image/png" sizes="96x96" href="/images/favicons/android-chrome-96x96.png"
+    link rel="icon" type="image/png" sizes="128x128" href="/images/favicons/android-chrome-128x128.png"
+    link rel="icon" type="image/png" sizes="144x144" href="/images/favicons/android-chrome-144x144.png"
+    link rel="icon" type="image/png" sizes="152x152" href="/images/favicons/android-chrome-152x152.png"
+    link rel="icon" type="image/png" sizes="192x192" href="/images/favicons/android-chrome-192x192.png"
+    link rel="icon" type="image/png" sizes="256x256" href="/images/favicons/android-chrome-256x256.png"
+    link rel="icon" type="image/png" sizes="384x384" href="/images/favicons/android-chrome-384x384.png"
+    link rel="icon" type="image/png" sizes="512x512" href="/images/favicons/android-chrome-512x512.png"
+    link rel="icon" type="image/png" sizes="36x36" href="/images/favicons/icon-36x36.png"
+    link rel="icon" type="image/png" sizes="48x48" href="/images/favicons/icon-48x48.png"
+    link rel="icon" type="image/png" sizes="72x72" href="/images/favicons/icon-72x72.png"
+    link rel="icon" type="image/png" sizes="96x96" href="/images/favicons/icon-96x96.png"
+    link rel="icon" type="image/png" sizes="128x128" href="/images/favicons/icon-128x128.png"
+    link rel="icon" type="image/png" sizes="144x144" href="/images/favicons/icon-144x144.png"
+    link rel="icon" type="image/png" sizes="152x152" href="/images/favicons/icon-152x152.png"
+    link rel="icon" type="image/png" sizes="160x160" href="/images/favicons/icon-160x160.png"
+    link rel="icon" type="image/png" sizes="192x192" href="/images/favicons/icon-192x192.png"
+    link rel="icon" type="image/png" sizes="196x196" href="/images/favicons/icon-196x196.png"
+    link rel="icon" type="image/png" sizes="256x256" href="/images/favicons/icon-256x256.png"
+    link rel="icon" type="image/png" sizes="384x384" href="/images/favicons/icon-384x384.png"
+    link rel="icon" type="image/png" sizes="512x512" href="/images/favicons/icon-512x512.png"
+    link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/icon-16x16.png"
+    link rel="icon" type="image/png" sizes="24x24" href="/images/favicons/icon-24x24.png"
+    link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/icon-32x32.png"
+
+    link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css" async="async"
+    script src="https://kit.fontawesome.com/d0384ad1a7.js" defer="defer"
     = stylesheet_link_tag    'application', media: 'screen', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-    script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
+    script src="https://code.jquery.com/jquery-3.4.1.min.js" async="async"
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload', async: "async"
+    script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" defer="defer"
+    script src="https://platform.twitter.com/widgets.js" charset="utf-8"  defer="defer"
+    = yield :css_each_page
     = yield :css_each_page
   body
     = render 'admin/header'
