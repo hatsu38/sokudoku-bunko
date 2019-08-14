@@ -2,7 +2,7 @@
 
 class BooksController < ApplicationController
   impressionist actions: [:show]
-  before_action :set_ranking, only: %i[index show ranking]
+  before_action :set_ranking, only: %i[index show]
   def index
     @books = Book.viewable.efficiency_list.recent(30)
   end
@@ -17,6 +17,7 @@ class BooksController < ApplicationController
   end
 
   def ranking
+    @rankings = Book.viewable.where(id: Ranking.order(rank: :asc).select(:book_id)).includes(:author, :rakuten_book_info)
   end
 
   private

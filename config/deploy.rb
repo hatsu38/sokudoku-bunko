@@ -65,7 +65,18 @@ namespace :deploy do
     on roles(:app) do
       with rails_env: fetch(:rails_env) do
         within current_path do
-          execute :bundle, :exec, :rake, 'ranking:add_ranking[30]'
+          execute :bundle, :exec, :rake, 'ranking:add_ranking[500]'
+        end
+      end
+    end
+  end
+
+  desc 'regist_ranking'
+  task :regist_ranking do
+    on roles(:app) do
+      with rails_env: fetch(:rails_env) do
+        within current_path do
+          execute :bundle, :exec, :rake, 'ranking:regist_book_ranking'
         end
       end
     end

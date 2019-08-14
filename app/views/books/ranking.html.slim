@@ -2,6 +2,8 @@
 - content_for :css_each_page, stylesheet_link_tag('books'), media: 'screen'
 .hero-body.container
   p.has-text-weight-bold.has-text-center-pc そくどく文庫は、本を読むのが遅い人でも楽に本を読む速度が早くなるサイトです📖
-#books.container
-  books
-= javascript_pack_tag "books"
+section.section.push-top
+  .container
+    h2.subtitle.has-text-weight-bold 人気小説
+    .columns.is-mobile.is-multiline
+      = render 'books/books', books: @rankings
