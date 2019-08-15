@@ -1,12 +1,11 @@
 <template>
-  <section class="section">
+  <section class="section is-paddingless">
     <div class="container">
-      <h2 class="subtitle has-text-weight-bold section-title">小説一覧</h2>
       <div v-for='author in authors' :key='author.id + author.name' class="author-block">
-        <div v-if="author.books">
+        <div v-if="author.books" class="has-background-white">
           <h3 class="author-name has-text-weight-bold push-bottom">{{ author.name }}</h3>
           <div class='columns is-mobile is-multiline'>
-            <div v-for='book in author.books' :key="book.id" class='column is-6-mobile is-3-tablet is-2-desktop'>
+            <div v-for='book in author.books' :key="book.id" class='column is-6-mobile is-3-tablet is-3-desktop'>
               <div class="card">
                 <div class="card-image light-border-bottom">
                   <figure class="image is-relative" v-if="book.rakuten_book_info">
@@ -26,6 +25,9 @@
               </div>
             </div>
           </div>
+          <p class="has-text-weight-bold has-text-centered to-ranking">
+            <a :href="'/authors/'+author.name">もっと見る<i class="fas fa-chevron-right"></i></a>
+          </p>
         </div>
       </div>
       <infinite-loading spinner='waveDots' @infinite='infiniteHandler'>
