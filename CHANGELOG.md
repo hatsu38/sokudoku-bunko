@@ -1,6 +1,10 @@
 ### verion名
   - #PR番号 PR名
 
+### version 0.1.6
+  - #100 著者の本をなるべくランキング順に表示
+  - #98 :art:著者一覧とその著者の本を複数表示するVueに変更
+
 ### version 0.1.5
   - #95 :sparkles:RakutenBookInfoをリクエスト,作成するメソッド作成
 

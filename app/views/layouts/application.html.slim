@@ -4,6 +4,7 @@ html lang="ja"
     // <!-- Global site tag (gtag.js) - Google Analytics -->
     - if Rails.env.production?
       script async="async" src="https://www.googletagmanager.com/gtag/js?id=UA-81051454-19"
+      script src="https://cdn.lr-ingest.io/LogRocket.min.js"
       javascript:
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
@@ -17,6 +18,7 @@ html lang="ja"
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','GTM-5K7S3LK')
         // <!-- End Google Tag Manager -->
+        window.LogRocket && window.LogRocket.init('personal-development/personal-development');
     - if content_for? :html_title
       title
         == yield :html_title
