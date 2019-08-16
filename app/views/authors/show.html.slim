@@ -1,7 +1,10 @@
 - content_for :html_title, "#{@author.name}の速読できる本一覧"
 - content_for :meta_description, "#{@author.name}の#{@author.books.size}冊の本一覧です。「#{@author.books.first.title}」などがあります。"
 - content_for :css_each_page, stylesheet_link_tag('books'), media: 'screen'
-h1.title.has-text-centered.is-4.push-top = @author.name
+h1.title.has-text-centered.is-4.push-top.has-text-grey-darker
+  | #{@author.name}
+  span.is-size-6.has-text-grey-dark
+    | (#{@author.books.size})
 #books
   books
 = javascript_pack_tag "books"

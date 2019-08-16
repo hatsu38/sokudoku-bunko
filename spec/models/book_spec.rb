@@ -71,7 +71,6 @@ RSpec.describe Book, type: :model do
       context 'not exist params' do
         it 'work' do
           expect(Book.search('').length).to eq(Book.all.length)
-          expect(Book.search('').first.id).to eq(Book.last.id)
         end
       end
     end
