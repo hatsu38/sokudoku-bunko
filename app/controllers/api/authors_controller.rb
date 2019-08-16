@@ -8,6 +8,14 @@ class Api::AuthorsController < ApplicationController
 
   def show
     @author = Author.find_by(name: params[:name])
-    @books = @author ? @author.books.page(params[:page]).per(PER).includes(:author, :rakuten_book_info).order('rakuten_book_infos.medium_image_url desc') : nil
+    @books =  if @author
+                @author.books
+                  .includes(:author, :rakuten_book_info, :ranking)
+                  .order(Arel.sql('rankings.rank is null, rankings.rank asc'))
+                  .order('rakuten_book_infos.medium_image_url desc')
+                  .page(params[:page]).per(PER)
+              else
+                nil
+              end
   end
 end

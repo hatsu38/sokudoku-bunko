@@ -30,7 +30,7 @@ class Api::BooksController < ApplicationController
   end
 
   def search
-    @books = Book.viewable.search(params[:title]).page(params[:page]).per(PER).order(id: :desc)
+    @books = Book.viewable.search(params[:title])
   end
 
   def ranking
