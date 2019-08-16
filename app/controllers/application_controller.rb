@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  unless Rails.env.development?
+  # unless Rails.env.development?
     rescue_from StandardError, with: :error_500
     rescue_from ActiveRecord::RecordNotFound, with: :error_404
     rescue_from ActionController::UnknownFormat, with: :error_404
     rescue_from ActionView::MissingTemplate, with: :error_404
-  end
+  # end
 
   def error_500(exception = nil)
     message = '[server error] internal server error occured'
@@ -36,6 +36,6 @@ class ApplicationController < ActionController::Base
 
   # エラー専用メールアドレスへのメール通知
   def send_error_mail(exception, message)
-    ErrorMailer.error_mail(exception, message).deliver_now
+    ErrorMailer.error_mail(exception, message, request).deliver_now
   end
 end

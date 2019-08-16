@@ -3,5 +3,12 @@
 --------------------
 <%= raw @exception.try(:message) %>
 
+--リクエスト--
+<%=  @request.url %>
+
+<%= @request.remote_ip %>
+
+<%= @request.headers[:HTTP_USER_AGENT] %>
+
 ---スタックトレース---
 <%= raw @exception.backtrace.join("\n") %>
