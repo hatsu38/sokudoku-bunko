@@ -219,7 +219,7 @@ GEM
       pry (>= 0.10.4)
     psych (3.1.0)
     public_suffix (3.1.1)
-    puma (3.12.1)
+    puma (3.12.2)
     rack (2.0.7)
     rack-proxy (0.6.5)
       rack
@@ -420,7 +420,7 @@ DEPENDENCIES
   natto
   pry-byebug
   pry-rails
-  puma (~> 3.11)
+  puma (~> 3.12)
   rails (~> 5.2)
   rails-controller-testing
   rails-erd
