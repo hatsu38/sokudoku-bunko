@@ -29,7 +29,7 @@ CSV.foreach('db/list_person_all_extended_utf8.csv', headers: true).with_index do
           # Dir.mkdir(base_dir + entry.name.delete('.txt'))
           # zip.extract(entry, base_dir + save_path) { true }
         end
-        sleep 0.3
+        # sleep 0.3
         next unless book.rakuten_book_info.nil?
         item = if RakutenWebService::Ichiba::Item.search(keyword: book.title + " 文庫 " + book.author.name).first.present?
                 RakutenWebService::Ichiba::Item.search(keyword: book.title + " 文庫 " + book.author.name).first
