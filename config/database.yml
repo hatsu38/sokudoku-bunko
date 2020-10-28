@@ -1,10 +1,7 @@
 default: &default
-  adapter: mysql2
+  adapter: postgresql
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  socket: /tmp/mysql.sock
-  username: root
-  ppassword:
 
 development:
   <<: *default
@@ -16,10 +13,8 @@ test:
 
 production:
   <<: *default
-  username: root
-  database: sokudokubunko_production
-  password: <%= Rails.application.credentials.sokudokubunko_database_password %>
-  socket: /var/lib/mysql/mysql.sock
+  url: <%= ENV['DATABASE_URL'] %>
+
 # default: &default
 #   adapter: postgresql
 #   encoding: unicode

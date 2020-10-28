@@ -12,7 +12,10 @@
 
 ActiveRecord::Schema.define(version: 2019_08_14_071545) do
 
-  create_table "authors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "authors", force: :cascade do |t|
     t.string "name", null: false
     t.date "birthday"
     t.integer "authorid", null: false
@@ -21,7 +24,7 @@ ActiveRecord::Schema.define(version: 2019_08_14_071545) do
     t.integer "books_count", default: 0
   end
 
-  create_table "books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "books", force: :cascade do |t|
     t.string "title", null: false
     t.string "txt_file", null: false
     t.date "published"
@@ -35,7 +38,7 @@ ActiveRecord::Schema.define(version: 2019_08_14_071545) do
     t.index ["author_id"], name: "index_books_on_author_id"
   end
 
-  create_table "impressions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "impressions", force: :cascade do |t|
     t.string "impressionable_type"
     t.integer "impressionable_id"
     t.integer "user_id"
@@ -54,14 +57,14 @@ ActiveRecord::Schema.define(version: 2019_08_14_071545) do
     t.index ["controller_name", "action_name", "request_hash"], name: "controlleraction_request_index"
     t.index ["controller_name", "action_name", "session_hash"], name: "controlleraction_session_index"
     t.index ["impressionable_type", "impressionable_id", "ip_address"], name: "poly_ip_index"
-    t.index ["impressionable_type", "impressionable_id", "params"], name: "poly_params_request_index", length: { params: 255 }
+    t.index ["impressionable_type", "impressionable_id", "params"], name: "poly_params_request_index"
     t.index ["impressionable_type", "impressionable_id", "request_hash"], name: "poly_request_index"
     t.index ["impressionable_type", "impressionable_id", "session_hash"], name: "poly_session_index"
-    t.index ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index", length: { message: 255 }
+    t.index ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index"
     t.index ["user_id"], name: "index_impressions_on_user_id"
   end
 
-  create_table "rakuten_book_infos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "rakuten_book_infos", force: :cascade do |t|
     t.integer "price"
     t.string "affiliate_url"
     t.string "small_image_url"
@@ -73,7 +76,7 @@ ActiveRecord::Schema.define(version: 2019_08_14_071545) do
     t.index ["book_id"], name: "index_rakuten_book_infos_on_book_id"
   end
 
-  create_table "rankings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "rankings", force: :cascade do |t|
     t.integer "rank", null: false
     t.bigint "book_id"
     t.datetime "created_at", null: false
@@ -81,7 +84,7 @@ ActiveRecord::Schema.define(version: 2019_08_14_071545) do
     t.index ["book_id"], name: "index_rankings_on_book_id"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
